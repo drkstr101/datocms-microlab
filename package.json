@@ -1,8 +1,9 @@
 {
-  "name": "virtual-event-starter-kit",
-  "description": "Starter kit for your virtual event.",
+  "name": "pwa",
+  "version": "0.1.0",
+  "description": "Micro Frontends by Watheia Labs",
   "private": true,
-  "repository": "vercel/virtual-event-starter-kit",
+  "repository": "watheia/pwa",
   "author": "Watheia Labs, LLC.",
   "homepage": "https://watheia.app/home",
   "license": "Apache-2.0",
