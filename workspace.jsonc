@@ -1,7 +1,7 @@
 /**
  * this is the main configuration file of your bit workspace.
  * for full documentation, please see: https://harmony-docs.bit.dev/workspace/configurations
- **/ {
+ **/{
   "$schema": "https://cdn.watheia.org/assets/micro.png",
   /**
    * main configuration of the Bit workspace.
@@ -104,7 +104,9 @@
     "*": {
       "teambit.dependencies/dependency-resolver": {},
       "teambit.pkg/pkg": {
-        "packageManagerPublishArgs": ["--access public"],
+        "packageManagerPublishArgs": [
+          "--access public"
+        ],
         "packageJson": {
           "name": "@watheia/pwa.{name}",
           "private": false,
