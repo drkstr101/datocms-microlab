@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,47 +13,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Job, Sponsor, Stage, Speaker } from '@lib/types';
-import { richTextAsText, getLinkUrl } from './utils';
+import { Job, Sponsor, Zone, Speaker } from "@lib/types"
+import { richTextAsText, getLinkUrl } from "./utils"
 
-const API_REF_URL = `https://${process.env.PRISMIC_REPO_ID}.prismic.io/api/v2`;
-const API_URL = `https://${process.env.PRISMIC_REPO_ID}.prismic.io/graphql`;
-const API_TOKEN = process.env.PRISMIC_ACCESS_TOKEN || '';
+const API_REF_URL = `https://${process.env.PRISMIC_REPO_ID}.prismic.io/api/v2`
+const API_URL = `https://${process.env.PRISMIC_REPO_ID}.prismic.io/graphql`
+const API_TOKEN = process.env.PRISMIC_ACCESS_TOKEN || ""
 
 async function fetchCmsMasterRef() {
-  const res = await fetch(`${API_REF_URL}${API_TOKEN ? `?access_token=${API_TOKEN}` : ''}`);
+  const res = await fetch(`${API_REF_URL}${API_TOKEN ? `?access_token=${API_TOKEN}` : ""}`)
 
-  const json = await res.json();
+  const json = await res.json()
   if (json.errors) {
     // eslint-disable-next-line no-console
-    console.error(json.errors);
-    throw new Error('Failed to fetch API');
+    console.error(json.errors)
+    throw new Error("Failed to fetch API")
   }
 
-  const masterVersion = json.refs?.find((apiVersion: any) => apiVersion.id === 'master') || null;
-  const masterRef = masterVersion?.ref || null;
+  const masterVersion =
+    json.refs?.find((apiVersion: any) => apiVersion.id === "master") || null
+  const masterRef = masterVersion?.ref || null
 
-  return masterRef;
+  return masterRef
 }
 
-async function fetchCmsAPI(query: string, { variables }: { variables?: Record<string, any> } = {}) {
-  const masterRef = await fetchCmsMasterRef();
+async function fetchCmsAPI(
+  query: string,
+  { variables }: { variables?: Record<string, any> } = {},
+) {
+  const masterRef = await fetchCmsMasterRef()
 
   const res = await fetch(`${API_URL}?query=${encodeURIComponent(query)}`, {
     headers: {
-      'Prismic-Ref': `${masterRef}`,
-      Authorization: `Token ${API_TOKEN}`
-    }
-  });
+      "Prismic-Ref": `${masterRef}`,
+      Authorization: `Token ${API_TOKEN}`,
+    },
+  })
 
-  const json = await res.json();
+  const json = await res.json()
   if (json.errors) {
     // eslint-disable-next-line no-console
-    console.error(json.errors);
-    throw new Error('Failed to fetch API');
+    console.error(json.errors)
+    throw new Error("Failed to fetch API")
   }
 
-  return json.data;
+  return json.data
 }
 
 export async function getAllSpeakers(): Promise<Speaker[]> {
@@ -93,7 +97,7 @@ export async function getAllSpeakers(): Promise<Speaker[]> {
         }
       }
     }
-  `);
+  `)
 
   const reformatedData = data.allSpeakers.edges.map((edge: any) => {
     return {
@@ -106,22 +110,25 @@ export async function getAllSpeakers(): Promise<Speaker[]> {
       company: richTextAsText(edge.node.company),
       image: {
         url:
-          edge.node.image?.url.replace('compress,format', 'format') || 'https://images.prismic.io'
+          edge.node.image?.url.replace("compress,format", "format") ||
+          "https://images.prismic.io",
       },
       talk: {
-        title: edge.node.talk?.title ? richTextAsText(edge.node.talk.title) : '',
-        description: edge.node.talk?.description ? richTextAsText(edge.node.talk.description) : ''
-      }
-    };
-  });
+        title: edge.node.talk?.title ? richTextAsText(edge.node.talk.title) : "",
+        description: edge.node.talk?.description
+          ? richTextAsText(edge.node.talk.description)
+          : "",
+      },
+    }
+  })
 
-  return reformatedData;
+  return reformatedData
 }
 
-export async function getAllStages(): Promise<Stage[]> {
+export async function getAllZones(): Promise<Zone[]> {
   const data = await fetchCmsAPI(`
     {
-      allStages(first: 100, sortBy: name_ASC) {
+      allZones(first: 100, sortBy: name_ASC) {
         edges {
           node {
             name
@@ -165,9 +172,9 @@ export async function getAllStages(): Promise<Stage[]> {
         }
       }
     }
-  `);
+  `)
 
-  const reformatedData = data.allStages.edges.map((edge: any) => {
+  const reformatedData = data.allZones.edges.map((edge: any) => {
     return {
       name: richTextAsText(edge.node.name),
       slug: edge.node._meta.uid,
@@ -186,16 +193,16 @@ export async function getAllStages(): Promise<Stage[]> {
                 slug: item.speaker._meta.uid,
                 image: {
                   url:
-                    item.speaker.image?.url.replace('compress,format', 'format') ||
-                    'https://images.prismic.io'
-                }
-              }))
-            };
-        })
-    };
-  });
+                    item.speaker.image?.url.replace("compress,format", "format") ||
+                    "https://images.prismic.io",
+                },
+              })),
+            }
+        }),
+    }
+  })
 
-  return reformatedData;
+  return reformatedData
 }
 
 export async function getAllSponsors(): Promise<Sponsor[]> {
@@ -245,7 +252,7 @@ export async function getAllSponsors(): Promise<Sponsor[]> {
         }
       }
     }
-  `);
+  `)
 
   const reformatedData = data.allCompanys.edges.map((edge: any) => {
     return {
@@ -260,20 +267,22 @@ export async function getAllSponsors(): Promise<Sponsor[]> {
       tier: edge.node.tier,
       links: edge.node.links.map((item: any) => ({
         url: getLinkUrl(item.link),
-        text: item.link_text
+        text: item.link_text,
       })),
       cardImage: {
         url:
-          edge.node.card_image?.url.replace('compress,format', 'format') ||
-          'https://images.prismic.io'
+          edge.node.card_image?.url.replace("compress,format", "format") ||
+          "https://images.prismic.io",
       },
       logo: {
-        url: edge.node.logo?.url.replace('compress,format', 'format') || 'https://images.prismic.io'
-      }
-    };
-  });
+        url:
+          edge.node.logo?.url.replace("compress,format", "format") ||
+          "https://images.prismic.io",
+      },
+    }
+  })
 
-  return reformatedData;
+  return reformatedData
 }
 
 export async function getAllJobs(): Promise<Job[]> {
@@ -305,7 +314,7 @@ export async function getAllJobs(): Promise<Job[]> {
         }
       }
     }
-  `);
+  `)
 
   const reformatedData = data.allJobs.edges.map((edge: any) => {
     return {
@@ -315,9 +324,9 @@ export async function getAllJobs(): Promise<Job[]> {
       description: richTextAsText(edge.node.description),
       discord: getLinkUrl(edge.node.discord),
       link: getLinkUrl(edge.node.link),
-      rank: edge.node.rank
-    };
-  });
+      rank: edge.node.rank,
+    }
+  })
 
-  return reformatedData;
+  return reformatedData
 }

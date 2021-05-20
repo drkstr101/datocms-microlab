@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,44 +14,44 @@
  * limitations under the License.
  */
 
-import { GetStaticProps } from 'next';
+import { GetStaticProps } from "next"
 
-import Page from '@components/page';
-import Schedule from '@components/schedule';
-import Layout from '@components/layout';
-import Header from '@components/header';
+import Page from "@components/page"
+import Schedule from "@components/schedule"
+import Layout from "@components/layout"
+import Header from "@components/header"
 
-import { getAllStages } from '@lib/cms-api';
-import { Stage } from '@lib/types';
-import { META_DESCRIPTION } from '@lib/constants';
+import { getAllZones } from "@lib/cms-api"
+import { Zone } from "@lib/types"
+import { META_DESCRIPTION } from "@lib/constants"
 
 type Props = {
-  allStages: Stage[];
-};
+  allZones: Zone[]
+}
 
-export default function SchedulePage({ allStages }: Props) {
+export default function SchedulePage({ allZones }: Props) {
   const meta = {
-    title: 'Schedule - Virtual Event Starter Kit',
-    description: META_DESCRIPTION
-  };
+    title: "Schedule - Virtual Event Starter Kit",
+    description: META_DESCRIPTION,
+  }
 
   return (
     <Page meta={meta}>
       <Layout>
         <Header hero="Schedule" description={meta.description} />
-        <Schedule allStages={allStages} />
+        <Schedule allZones={allZones} />
       </Layout>
     </Page>
-  );
+  )
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const allStages = await getAllStages();
+  const allZones = await getAllZones()
 
   return {
     props: {
-      allStages
+      allZones,
     },
-    revalidate: 60
-  };
-};
+    revalidate: 60,
+  }
+}

@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,12 +28,16 @@ export default function App({ Component, pageProps }: AppProps) {
     document.body.classList?.remove('loading');
   }, []);
   return (
-    <SSRProvider>
-      <OverlayProvider>
-        <Component {...pageProps} />
-        <ResizeHandler />
-        <NProgress />
-      </OverlayProvider>
-    </SSRProvider>
+    <>
+      <link rel="stylesheet" href="https://use.typekit.net/xyi1bqv.css"></link>
+      <SSRProvider>
+        <OverlayProvider>
+          <Component {...pageProps} />
+          <ResizeHandler />
+          <NProgress />
+        </OverlayProvider>
+      </SSRProvider>
+      );
+    </>
   );
 }

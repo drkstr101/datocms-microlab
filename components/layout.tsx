@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-import Link from 'next/link';
-import cn from 'classnames';
-import { useRouter } from 'next/router';
-import { SkipNavContent } from '@reach/skip-nav';
-import { NAVIGATION } from '@lib/constants';
-import styles from './layout.module.css';
-import Logo from './icons/icon-logo';
-import MobileMenu from './mobile-menu';
-import Footer, { HostedByVercel } from './footer';
-import ViewSource from '@components/view-source';
+import Link from "next/link"
+import cn from "classnames"
+import { useRouter } from "next/router"
+import { SkipNavContent } from "@reach/skip-nav"
+import { NAVIGATION } from "@lib/constants"
+import styles from "./layout.module.css"
+import MobileMenu from "./mobile-menu"
+import Footer from "./footer"
+import ViewSource from "@components/view-source"
+// import logo from './icons/micro.svg';
 
 type Props = {
-  children: React.ReactNode;
-  className?: string;
-  hideNav?: boolean;
-  layoutStyles?: any;
-};
+  children: React.ReactNode
+  className?: string
+  hideNav?: boolean
+  layoutStyles?: any
+}
 
 export default function Layout({ children, className, hideNav, layoutStyles }: Props) {
-  const router = useRouter();
-  const activeRoute = router.asPath;
+  const router = useRouter()
+  const activeRoute = router.asPath
 
   return (
     <>
@@ -42,12 +42,12 @@ export default function Layout({ children, className, hideNav, layoutStyles }: P
       <div className={styles.background}>
         {!hideNav && (
           <header className={cn(styles.header)}>
-            <div className={styles['header-logos']}>
+            <div className={styles["header-logos"]}>
               <MobileMenu key={router.asPath} />
               <Link href="/">
                 {/* eslint-disable-next-line */}
                 <a className={styles.logo}>
-                  <Logo />
+                  <image href="/micro.svg" width="64" height="64" />
                 </a>
               </Link>
             </div>
@@ -56,7 +56,7 @@ export default function Layout({ children, className, hideNav, layoutStyles }: P
                 <Link key={name} href={route}>
                   <a
                     className={cn(styles.tab, {
-                      [styles['tab-active']]: activeRoute.startsWith(route)
+                      [styles["tab-active"]]: activeRoute.startsWith(route),
                     })}
                   >
                     {name}
@@ -64,8 +64,8 @@ export default function Layout({ children, className, hideNav, layoutStyles }: P
                 </Link>
               ))}
             </div>
-            <div className={cn(styles['header-right'])}>
-              <HostedByVercel />
+            <div className={cn(styles["header-right"])}>
+              <image href="/micro.svg" width="64" height="64" />
             </div>
           </header>
         )}
@@ -74,9 +74,9 @@ export default function Layout({ children, className, hideNav, layoutStyles }: P
             <SkipNavContent />
             <div className={cn(styles.full, className)}>{children}</div>
           </main>
-          {!activeRoute.startsWith('/stage') && <Footer />}
+          {!activeRoute.startsWith("/zone") && <Footer />}
         </div>
       </div>
     </>
-  );
+  )
 }

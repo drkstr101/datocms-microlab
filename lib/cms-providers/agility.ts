@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,49 +17,54 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const agilityContentSync = require('@agility/content-sync');
-const agilityFileSystem = require('@agility/content-sync/src/store-interface-filesystem');
+const agilityContentSync = require("@agility/content-sync")
+const agilityFileSystem = require("@agility/content-sync/src/store-interface-filesystem")
 
-import { Job, Speaker, Sponsor, Stage } from '../types';
+import { Job, Speaker, Sponsor, Zone } from "../types"
 
 const agilityConfig = {
   guid: process.env.AGILITY_GUID,
   fetchAPIKey: process.env.AGILITY_API_FETCH_KEY,
   previewAPIKey: process.env.AGILITY_API_PREVIEW_KEY,
-  languageCode: 'en-us',
-  channelName: 'website',
-  securityKey: process.env.AGILITY_SECURITY_KEY
-};
+  languageCode: "en-us",
+  channelName: "website",
+  securityKey: process.env.AGILITY_SECURITY_KEY,
+}
 
 export async function getAllSpeakers(): Promise<Speaker[]> {
-  const agility = await syncContentAndGetClient(null);
+  const agility = await syncContentAndGetClient(null)
   const speakers = await agility.getContentList({
-    referenceName: 'speakers',
-    languageCode: agilityConfig.languageCode
-  });
+    referenceName: "speakers",
+    languageCode: agilityConfig.languageCode,
+  })
   const schedule = await agility.getContentList({
-    referenceName: 'schedule',
-    languageCode: agilityConfig.languageCode
-  });
-  const languageCode = agilityConfig.languageCode;
+    referenceName: "schedule",
+    languageCode: agilityConfig.languageCode,
+  })
+  const languageCode = agilityConfig.languageCode
 
-  const lst: Speaker[] = [];
+  const lst: Speaker[] = []
 
   await asyncForEach(speakers, async (speaker: any) => {
-    speaker = await expandContentItem({ agility, contentItem: speaker, languageCode, depth: 1 });
+    speaker = await expandContentItem({
+      agility,
+      contentItem: speaker,
+      languageCode,
+      depth: 1,
+    })
 
     const talks = schedule
       .filter((t: any) => {
-        return `,${t.fields.speakerIDs},`.indexOf(`,${speaker.contentID},`) !== -1;
+        return `,${t.fields.speakerIDs},`.indexOf(`,${speaker.contentID},`) !== -1
       })
       .map((t: any) => {
         return {
           title: t.fields.name,
-          description: t.fields.description
-        };
-      });
+          description: t.fields.description,
+        }
+      })
 
-    const talk = (talks || []).length > 0 ? talks[0] : null;
+    const talk = (talks || []).length > 0 ? talks[0] : null
 
     lst.push({
       name: speaker.fields.name,
@@ -70,28 +75,28 @@ export async function getAllSpeakers(): Promise<Speaker[]> {
       github: speaker.fields.github,
       company: speaker.fields.company.fields.name,
       image: {
-        url: `${speaker.fields.image.url}?w=300&h=400&c=1`
+        url: `${speaker.fields.image.url}?w=300&h=400&c=1`,
       },
       imageSquare: {
-        url: `${speaker.fields.image.url}?w=192&h=192&c=1`
+        url: `${speaker.fields.image.url}?w=192&h=192&c=1`,
       },
-      talk
-    });
-  });
+      talk,
+    })
+  })
 
-  return lst.sort((a, b) => (a.name > b.name ? 1 : -1));
+  return lst.sort((a, b) => (a.name > b.name ? 1 : -1))
 }
 
-export async function getAllStages(): Promise<Stage[]> {
-  const agility = await syncContentAndGetClient(null);
-  const languageCode = agilityConfig.languageCode;
-  const stages = await agility.getContentList({ referenceName: 'stages', languageCode });
-  await expandContentList({ agility, contentItems: stages, languageCode, depth: 2 });
+export async function getAllZones(): Promise<Zone[]> {
+  const agility = await syncContentAndGetClient(null)
+  const languageCode = agilityConfig.languageCode
+  const zones = await agility.getContentList({ referenceName: "zones", languageCode })
+  await expandContentList({ agility, contentItems: zones, languageCode, depth: 2 })
 
-  const lst: Stage[] = stages
+  const lst: Zone[] = zones
     .sort((a: any, b: any) => (a.properties.itemOrder > b.properties.itemOrder ? 1 : -1))
-    .map((stage: any) => {
-      const schedule: any[] = stage.fields.schedule?.map((talk: any) => {
+    .map((zone: any) => {
+      const schedule: any[] = zone.fields.schedule?.map((talk: any) => {
         return {
           title: talk.fields.name,
           start: talk.fields.start,
@@ -101,55 +106,57 @@ export async function getAllStages(): Promise<Stage[]> {
               name: speaker.fields.name,
               slug: speaker.fields.slug,
               image: {
-                url: `${speaker.fields.image.url}?w=120&h=120&c=1`
-              }
-            };
-          })
-        };
-      });
+                url: `${speaker.fields.image.url}?w=120&h=120&c=1`,
+              },
+            }
+          }),
+        }
+      })
 
       return {
-        name: stage.fields.name,
-        slug: stage.fields.slug,
-        stream: stage.fields.stream,
-        discord: stage.fields.discord,
-        schedule
-      };
-    });
+        name: zone.fields.name,
+        slug: zone.fields.slug,
+        stream: zone.fields.stream,
+        discord: zone.fields.discord,
+        schedule,
+      }
+    })
 
-  return lst;
+  return lst
 }
 
 export async function getAllSponsors(): Promise<Sponsor[]> {
-  const agility = await syncContentAndGetClient(null);
-  const languageCode = agilityConfig.languageCode;
+  const agility = await syncContentAndGetClient(null)
+  const languageCode = agilityConfig.languageCode
 
   let companies = await agility.getContentList({
-    referenceName: 'companies',
-    languageCode: agilityConfig.languageCode
-  });
-  companies = companies.sort((a: any, b: any) => (a.fields.tierRank > b.fields.tierRank ? 1 : -1));
+    referenceName: "companies",
+    languageCode: agilityConfig.languageCode,
+  })
+  companies = companies.sort((a: any, b: any) =>
+    a.fields.tierRank > b.fields.tierRank ? 1 : -1,
+  )
 
-  const lst: Sponsor[] = [];
+  const lst: Sponsor[] = []
   await asyncForEach(companies, async (company: any) => {
     company = await expandLinkedList({
       agility,
       contentItem: company,
       languageCode,
-      fieldName: 'links',
+      fieldName: "links",
       sortIDField: null,
-      excludeNonSortedIds: false
-    });
+      excludeNonSortedIds: false,
+    })
 
-    let links = [];
+    let links = []
 
     if (company.fields.links) {
       links = company.fields.links.map((link: any) => {
         return {
           url: link.fields.link.href,
-          text: link.fields.link.text
-        };
-      });
+          text: link.fields.link.text,
+        }
+      })
     }
 
     lst.push({
@@ -163,29 +170,29 @@ export async function getAllSponsors(): Promise<Sponsor[]> {
       tier: company.fields.tier,
       description: company.fields.description,
       cardImage: {
-        url: `${company.fields.cardImage.url}`
+        url: `${company.fields.cardImage.url}`,
       },
       logo: {
-        url: `${company.fields.logo.url}`
+        url: `${company.fields.logo.url}`,
       },
-      links
-    });
-  });
+      links,
+    })
+  })
 
-  return lst;
+  return lst
 }
 
 export async function getAllJobs(): Promise<Job[]> {
-  const agility = await syncContentAndGetClient(null);
-  const languageCode = agilityConfig.languageCode;
+  const agility = await syncContentAndGetClient(null)
+  const languageCode = agilityConfig.languageCode
   let jobs = await agility.getContentList({
-    referenceName: 'jobs',
-    languageCode: agilityConfig.languageCode
-  });
+    referenceName: "jobs",
+    languageCode: agilityConfig.languageCode,
+  })
 
-  jobs = jobs.sort((a: any, b: any) => (a.fields.rank > b.fields.rank ? 1 : -1));
+  jobs = jobs.sort((a: any, b: any) => (a.fields.rank > b.fields.rank ? 1 : -1))
 
-  await expandContentList({ agility, contentItems: jobs, languageCode, depth: 1 });
+  await expandContentList({ agility, contentItems: jobs, languageCode, depth: 1 })
 
   return jobs
     .map((job: any) => {
@@ -196,36 +203,36 @@ export async function getAllJobs(): Promise<Job[]> {
         description: job.fields.description,
         discord: job.fields.discord,
         link: job.fields.link,
-        rank: parseInt(job.fields.rank)
-      };
+        rank: parseInt(job.fields.rank),
+      }
     })
-    .sort((a: any, b: any) => (a.rank > b.rank ? 1 : -1));
+    .sort((a: any, b: any) => (a.rank > b.rank ? 1 : -1))
 }
 
 const getSyncClient = (context: any) => {
-  let { isPreview, isDevelopmentMode } = context || {};
+  let { isPreview, isDevelopmentMode } = context || {}
 
   if (isDevelopmentMode === undefined) {
-    isDevelopmentMode = process.env.NODE_ENV === 'development';
+    isDevelopmentMode = process.env.NODE_ENV === "development"
   }
 
   if (isPreview === undefined) {
-    isPreview = isDevelopmentMode;
+    isPreview = isDevelopmentMode
   }
 
-  const apiKey = isPreview ? agilityConfig.previewAPIKey : agilityConfig.fetchAPIKey;
+  const apiKey = isPreview ? agilityConfig.previewAPIKey : agilityConfig.fetchAPIKey
 
   if (!agilityConfig.guid) {
-    console.log('Agility CMS => No GUID was provided.');
-    return null;
+    console.log("Agility CMS => No GUID was provided.")
+    return null
   }
 
   let cachePath = `node_modules/@agility/content-sync/cache/${agilityConfig.guid}/${
-    isPreview ? 'preview' : 'live'
-  }`;
+    isPreview ? "preview" : "live"
+  }`
 
   if (!isDevelopmentMode) {
-    cachePath = `/tmp/agilitycache/${agilityConfig.guid}/${isPreview ? 'preview' : 'live'}`;
+    cachePath = `/tmp/agilitycache/${agilityConfig.guid}/${isPreview ? "preview" : "live"}`
   }
 
   const client = agilityContentSync.getSyncClient({
@@ -237,85 +244,85 @@ const getSyncClient = (context: any) => {
     store: {
       interface: agilityFileSystem,
       options: {
-        rootPath: cachePath
-      }
-    }
-  });
+        rootPath: cachePath,
+      },
+    },
+  })
 
-  return client;
-};
+  return client
+}
 
 const syncContentAndGetClient = async (context: any) => {
-  const client = getSyncClient(context);
+  const client = getSyncClient(context)
 
-  await client.runSync();
+  await client.runSync()
 
-  return client.store;
-};
+  return client.store
+}
 
 const expandContentList = async ({
   agility,
   contentItems,
   languageCode,
-  depth
+  depth,
 }: {
-  agility: any;
-  contentItems: any;
-  languageCode: string;
-  depth: number;
+  agility: any
+  contentItems: any
+  languageCode: string
+  depth: number
 }) => {
   await asyncForEach(contentItems, async (contentItem: any) => {
-    await expandContentItem({ agility, contentItem, languageCode, depth });
-  });
-};
+    await expandContentItem({ agility, contentItem, languageCode, depth })
+  })
+}
 
 const expandContentItem = async ({
   agility,
   contentItem,
   languageCode,
-  depth = 1
+  depth = 1,
 }: {
-  agility: any;
-  contentItem: any;
-  languageCode: string;
-  depth: number;
+  agility: any
+  contentItem: any
+  languageCode: string
+  depth: number
 }) => {
-  if (!contentItem) return null;
+  if (!contentItem) return null
 
-  const api = agility;
+  const api = agility
 
   if (depth > 0) {
-    let fields = contentItem.fields;
-    if (!fields) fields = contentItem.customFields;
+    let fields = contentItem.fields
+    if (!fields) fields = contentItem.customFields
 
     for (const fieldName in fields) {
-      const fieldValue = fields[fieldName];
+      const fieldValue = fields[fieldName]
 
       if (fieldValue.contentid > 0) {
         const childItem = await api.getContentItem({
           contentID: fieldValue.contentid,
           languageCode,
-          depth: depth - 1
-        });
-        if (childItem != null) fields[fieldName] = childItem;
+          depth: depth - 1,
+        })
+        if (childItem != null) fields[fieldName] = childItem
       } else if (fieldValue.sortids && fieldValue.sortids.split) {
-        const sortIDAry = fieldValue.sortids.split(',');
-        const childItems = [];
+        const sortIDAry = fieldValue.sortids.split(",")
+        const childItems = []
 
         for (const childItemID of sortIDAry) {
           const childItem = await api.getContentItem({
             contentID: childItemID,
             languageCode,
-            depth: depth - 1
-          });
-          if (childItem != null) childItems.push(childItem);
+            depth: depth - 1,
+          })
+          if (childItem != null) childItems.push(childItem)
         }
-        fields[fieldName] = childItems;
+        fields[fieldName] = childItems
       }
     }
   }
-  return contentItem;
-};
+  return contentItem
+}
 
 const expandLinkedList = async ({
   agility,
@@ -323,64 +330,64 @@ const expandLinkedList = async ({
   languageCode,
   fieldName,
   sortIDField = null,
-  excludeNonSortedIds = false
+  excludeNonSortedIds = false,
 }: {
-  agility: any;
-  contentItem: any;
-  languageCode: string;
-  fieldName: string;
-  sortIDField: string | null;
-  excludeNonSortedIds: boolean;
+  agility: any
+  contentItem: any
+  languageCode: string
+  fieldName: string
+  sortIDField: string | null
+  excludeNonSortedIds: boolean
 }) => {
-  if (!contentItem) return null;
+  if (!contentItem) return null
 
-  const fieldObj = contentItem.fields[fieldName];
+  const fieldObj = contentItem.fields[fieldName]
   if (!fieldObj) {
-    contentItem.fields[fieldName] = [];
-    return contentItem;
+    contentItem.fields[fieldName] = []
+    return contentItem
   }
 
-  const referenceName = fieldObj.referencename;
+  const referenceName = fieldObj.referencename
   if (!referenceName)
-    throw Error(`A referencename property was not found on the ${fieldName} value.`);
+    throw Error(`A referencename property was not found on the ${fieldName} value.`)
 
-  let listItems = await agility.getContentList({ referenceName, languageCode });
+  let listItems = await agility.getContentList({ referenceName, languageCode })
   if (listItems?.length > 0) {
     if (sortIDField) {
-      const sortIDs = contentItem.fields[sortIDField];
+      const sortIDs = contentItem.fields[sortIDField]
 
       if (sortIDs?.length > 0 && sortIDs?.split) {
-        const sortIDAry = sortIDs.split(',');
-        const sortedItems = [];
+        const sortIDAry = sortIDs.split(",")
+        const sortedItems = []
 
         for (const idStr of sortIDAry) {
-          const childContentID = parseInt(idStr);
+          const childContentID = parseInt(idStr)
 
           const childItemIndex = listItems.findIndex(
-            (item: { contentID: number }) => item.contentID === childContentID
-          );
+            (item: { contentID: number }) => item.contentID === childContentID,
+          )
 
           if (childItemIndex >= 0) {
-            sortedItems.push(listItems[childItemIndex]);
-            listItems.splice(childItemIndex, 1);
+            sortedItems.push(listItems[childItemIndex])
+            listItems.splice(childItemIndex, 1)
           }
         }
 
         if (excludeNonSortedIds !== true) {
-          listItems = sortedItems.concat(listItems);
+          listItems = sortedItems.concat(listItems)
         } else {
-          listItems = sortedItems;
+          listItems = sortedItems
         }
       }
     }
   }
 
-  contentItem.fields[fieldName] = listItems;
-  return contentItem;
-};
+  contentItem.fields[fieldName] = listItems
+  return contentItem
+}
 
 const asyncForEach = async (array: any, callback: any) => {
   for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array);
+    await callback(array[index], index, array)
   }
-};
+}

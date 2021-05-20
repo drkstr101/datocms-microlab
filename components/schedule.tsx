@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,24 @@
  * limitations under the License.
  */
 
-import cn from 'classnames';
-import { Stage, Talk } from '@lib/types';
-import styles from './schedule.module.css';
-import TalkCard from './talk-card';
+import cn from "classnames"
+import { Zone, Talk } from "@lib/types"
+import styles from "./schedule.module.css"
+import TalkCard from "./talk-card"
 
-function StageRow({ stage }: { stage: Stage }) {
+function ZoneRow({ zone }: { zone: Zone }) {
   // Group talks by the time block
-  const timeBlocks = stage.schedule.reduce((allBlocks: any, talk) => {
-    allBlocks[talk.start] = [...(allBlocks[talk.start] || []), talk];
-    return allBlocks;
-  }, {});
+  const timeBlocks = zone.schedule.reduce((allBlocks: any, talk) => {
+    allBlocks[talk.start] = [...(allBlocks[talk.start] || []), talk]
+    return allBlocks
+  }, {})
 
   return (
-    <div key={stage.name} className={styles.row}>
-      <h3 className={cn(styles['stage-name'], styles[stage.slug])}>
-        <span>{stage.name}</span>
+    <div key={zone.name} className={styles.row}>
+      <h3 className={cn(styles["zone-name"], styles[zone.slug])}>
+        <span>{zone.name}</span>
       </h3>
-      <div className={cn(styles.talks, styles[stage.slug])}>
+      <div className={cn(styles.talks, styles[zone.slug])}>
         {Object.keys(timeBlocks).map((startTime: string) => (
           <div key={startTime}>
             {timeBlocks[startTime].map((talk: Talk, index: number) => (
@@ -41,21 +41,21 @@ function StageRow({ stage }: { stage: Stage }) {
         ))}
       </div>
     </div>
-  );
+  )
 }
 
 type Props = {
-  allStages: Stage[];
-};
+  allZones: Zone[]
+}
 
-export default function Schedule({ allStages }: Props) {
+export default function Schedule({ allZones }: Props) {
   return (
     <div className={styles.container}>
-      <div className={styles['row-wrapper']}>
-        {allStages.map(stage => (
-          <StageRow key={stage.slug} stage={stage} />
+      <div className={styles["row-wrapper"]}>
+        {allZones.map((zone) => (
+          <ZoneRow key={zone.slug} zone={zone} />
         ))}
       </div>
     </div>
-  );
+  )
 }

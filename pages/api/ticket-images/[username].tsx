@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 import { NextApiRequest, NextApiResponse } from 'next';
 import screenshot from '@lib/screenshot';
-import { SITE_URL, SAMPLE_TICKET_NUMBER } from '@lib/constants';
+import { SITE_URL, STATICTOKEN_SALT } from '@lib/constants';
 import redis from '@lib/redis';
 
 export default async function ticketImages(req: NextApiRequest, res: NextApiResponse) {
@@ -41,7 +41,7 @@ export default async function ticketImages(req: NextApiRequest, res: NextApiResp
         url = `${url}&name=${encodeURIComponent(name)}`;
       }
     } else {
-      url = `${SITE_URL}/ticket-image?ticketNumber=${encodeURIComponent(SAMPLE_TICKET_NUMBER)}`;
+      url = `${SITE_URL}/ticket-image?ticketNumber=${encodeURIComponent(STATICTOKEN_SALT)}`;
     }
     const file = await screenshot(url);
     res.setHeader('Content-Type', `image/png`);

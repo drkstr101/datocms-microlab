@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { nanoid } from 'nanoid';
 import { ConfUser } from '@lib/types';
 import validator from 'validator';
-import { SAMPLE_TICKET_NUMBER, COOKIE } from '@lib/constants';
+import { STATICTOKEN_SALT, COOKIE } from '@lib/constants';
 import cookie from 'cookie';
 import ms from 'ms';
 import redis, { emailToId } from '@lib/redis';
@@ -86,7 +86,7 @@ export default async function register(
     }
   } else {
     id = nanoid();
-    ticketNumber = SAMPLE_TICKET_NUMBER;
+    ticketNumber = STATICTOKEN_SALT;
     createdAt = Date.now();
     statusCode = 200;
   }

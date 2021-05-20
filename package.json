@@ -3,24 +3,31 @@
   "description": "Starter kit for your virtual event.",
   "private": true,
   "repository": "vercel/virtual-event-starter-kit",
-  "author": "Vercel Inc.",
-  "homepage": "https://demo.vercel.events",
+  "author": "Watheia Labs, LLC.",
+  "homepage": "https://watheia.app/home",
   "license": "Apache-2.0",
   "engines": {
-    "node": "12.x"
+    "node": "14.x"
   },
   "scripts": {
     "dev": "next",
     "start": "next start",
     "build": "next build",
-    "license": "addlicense -l apache -c 'Vercel Inc.' components/**/* lib/**/* pages/**/* styles/**/* *.ts *.js"
+    "license": "addlicense -l apache -c 'Watheia Labs, LLC.' components/**/* lib/**/* pages/**/* styles/**/* *.ts *.js"
   },
   "dependencies": {
     "@agility/content-fetch": "1.0.0",
     "@agility/content-sync": "0.1.23",
+    "@emotion/cache": "^11.4.0",
+    "@emotion/react": "^11.4.0",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
+    "@material-ui/core": "^5.0.0-alpha.34",
+    "@material-ui/icons": "^5.0.0-alpha.34",
     "@reach/skip-nav": "0.12.1",
     "chrome-aws-lambda": "5.5.0",
     "classnames": "2.2.6",
+    "clsx": "latest",
     "cookie": "0.4.1",
     "date-fns": "2.16.1",
     "htmlescape": "1.1.1",
@@ -35,7 +42,7 @@
     "react-dom": "17.0.1",
     "smoothscroll-polyfill": "0.4.4",
     "swr": "0.3.9",
-    "validator": "13.5.2",
+    "validator": "13.6.0",
     "vanilla-tilt": "1.7.0"
   },
   "devDependencies": {

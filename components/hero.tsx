@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,11 +30,11 @@ export default function Hero() {
           styles.description
         )}
       >
-        {SITE_DESCRIPTION}
+        by Watheia Labs
       </h2>
       <h1 className={cn(styleUtils.appear, styleUtils['appear-third'], styles.hero)}>
-        The first {BRAND_NAME}
-        <br className={styleUtils['show-on-desktop']} /> global user conference
+        Micro
+        <br className={styleUtils['show-on-desktop']} /> Frontends{' '}
       </h1>
       <h2
         className={cn(
@@ -44,14 +44,12 @@ export default function Hero() {
           styles.description
         )}
       >
-        {SITE_DESCRIPTION}
+        by Watheia Labs
       </h2>
       <div className={cn(styleUtils.appear, styleUtils['appear-fourth'], styles.info)}>
         <p>{DATE}</p>
         <div className={styles['description-separator']} />
-        <p>
-          <strong>Online</strong>
-        </p>
+        <p style={{ color: '#215C94', fontWeight: 300 }}>[offline]</p>
       </div>
     </div>
   );

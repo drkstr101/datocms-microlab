@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import redis from '@lib/redis';
 
 import Page from '@components/page';
 import ConfContent from '@components/index';
-import { SITE_URL, SITE_NAME, META_DESCRIPTION, SAMPLE_TICKET_NUMBER } from '@lib/constants';
+import { SITE_URL, SITE_NAME, META_DESCRIPTION, STATICTOKEN_SALT } from '@lib/constants';
 
 type Props = {
   username: string | null;
@@ -102,7 +102,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
         username: null,
         usernameFromParams: username || null,
         name: null,
-        ticketNumber: SAMPLE_TICKET_NUMBER
+        ticketNumber: STATICTOKEN_SALT
       },
       revalidate: 5
     };

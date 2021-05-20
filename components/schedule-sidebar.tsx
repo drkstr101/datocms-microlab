@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,51 +14,51 @@
  * limitations under the License.
  */
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { Stage } from '@lib/types';
-import styles from './schedule-sidebar.module.css';
-import Select from './select';
-import TalkCard from './talk-card';
-import { SHORT_DATE } from '@lib/constants';
+import { useState, useEffect } from "react"
+import { useRouter } from "next/router"
+import { Zone } from "@lib/types"
+import styles from "./schedule-sidebar.module.css"
+import Select from "./select"
+import TalkCard from "./talk-card"
+import { SHORT_DATE } from "@lib/constants"
 
 type Props = {
-  allStages: Stage[];
-};
+  allZones: Zone[]
+}
 
-export default function ScheduleSidebar({ allStages }: Props) {
-  const router = useRouter();
-  const [currentStageSlug, setCurrentStageSlug] = useState(router.query.slug);
-  const currentStage = allStages.find((s: Stage) => s.slug === currentStageSlug);
+export default function ScheduleSidebar({ allZones }: Props) {
+  const router = useRouter()
+  const [currentZoneSlug, setCurrentZoneSlug] = useState(router.query.slug)
+  const currentZone = allZones.find((s: Zone) => s.slug === currentZoneSlug)
 
   useEffect(() => {
-    setCurrentStageSlug(router.query.slug);
-  }, [router.query.slug]);
+    setCurrentZoneSlug(router.query.slug)
+  }, [router.query.slug])
 
   return (
     <div className={styles.schedule}>
       <h3 className={styles.header}>Schedule</h3>
       <p>{SHORT_DATE}</p>
       <Select
-        aria-label="Select a stage"
-        value={currentStageSlug}
-        onChange={e => {
-          const slug = e.target.value;
-          setCurrentStageSlug(slug);
-          router.push(`/stage/${slug}`);
+        aria-label="Select a zone"
+        value={currentZoneSlug}
+        onChange={(e) => {
+          const slug = e.target.value
+          setCurrentZoneSlug(slug)
+          router.push(`/zone/${slug}`)
         }}
       >
-        {allStages.map(stage => (
-          <option key={stage.slug} value={stage.slug}>
-            {stage.name}
+        {allZones.map((zone) => (
+          <option key={zone.slug} value={zone.slug}>
+            {zone.name}
           </option>
         ))}
       </Select>
       <div className={styles.talks}>
-        {currentStage?.schedule.map(talk => (
+        {currentZone?.schedule.map((talk) => (
           <TalkCard key={talk.title} talk={talk} showTime />
         ))}
       </div>
     </div>
-  );
+  )
 }

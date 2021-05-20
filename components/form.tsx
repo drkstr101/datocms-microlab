@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,48 +14,48 @@
  * limitations under the License.
  */
 
-import { useState } from 'react';
-import cn from 'classnames';
-import useConfData from '@lib/hooks/use-conf-data';
-import { useRouter } from 'next/router';
-import FormError from '@lib/form-error';
-import LoadingDots from './loading-dots';
-import styleUtils from './utils.module.css';
-import styles from './form.module.css';
-import useEmailQueryParam from '@lib/hooks/use-email-query-param';
-import { register } from '@lib/user-api';
+import { useState } from "react"
+import cn from "classnames"
+import useConfData from "@lib/hooks/use-conf-data"
+import { useRouter } from "next/router"
+import FormError from "@lib/form-error"
+import LoadingDots from "./loading-dots"
+import styleUtils from "./utils.module.css"
+import styles from "./form.module.css"
+import useNameQueryParam from "@lib/hooks/use-name-query-param"
+import { register } from "@lib/user-api"
 
-type FormState = 'default' | 'loading' | 'error';
+type FormState = "default" | "loading" | "error"
 
 type Props = {
-  sharePage?: boolean;
-};
+  sharePage?: boolean
+}
 
 export default function Form({ sharePage }: Props) {
-  const [email, setEmail] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
-  const [errorTryAgain, setErrorTryAgain] = useState(false);
-  const [focused, setFocused] = useState(false);
-  const [formState, setFormState] = useState<FormState>('default');
-  const { setPageState, setUserData } = useConfData();
-  const router = useRouter();
-  useEmailQueryParam('email', setEmail);
+  const [name, setName] = useState("")
+  const [errorMsg, setErrorMsg] = useState("")
+  const [errorTryAgain, setErrorTryAgain] = useState(false)
+  const [focused, setFocused] = useState(false)
+  const [formState, setFormState] = useState<FormState>("default")
+  const { setPageState, setUserData } = useConfData()
+  const router = useRouter()
+  useNameQueryParam("name", setName)
 
-  return formState === 'error' ? (
+  return formState === "error" ? (
     <div
       className={cn(styles.form, {
-        [styles['share-page']]: sharePage
+        [styles["share-page"]]: sharePage,
       })}
     >
-      <div className={styles['form-row']}>
-        <div className={cn(styles['input-label'], styles.error)}>
-          <div className={cn(styles.input, styles['input-text'])}>{errorMsg}</div>
+      <div className={styles["form-row"]}>
+        <div className={cn(styles["input-label"], styles.error)}>
+          <div className={cn(styles.input, styles["input-text"])}>{errorMsg}</div>
           <button
             type="button"
             className={cn(styles.submit, styles.register, styles.error)}
             onClick={() => {
-              setFormState('default');
-              setErrorTryAgain(true);
+              setFormState("default")
+              setErrorTryAgain(true)
             }}
           >
             Try Again
@@ -66,95 +66,95 @@ export default function Form({ sharePage }: Props) {
   ) : (
     <form
       className={cn(styles.form, {
-        [styles['share-page']]: sharePage,
+        [styles["share-page"]]: sharePage,
         [styleUtils.appear]: !errorTryAgain,
-        [styleUtils['appear-fifth']]: !errorTryAgain && !sharePage,
-        [styleUtils['appear-third']]: !errorTryAgain && sharePage
+        [styleUtils["appear-fifth"]]: !errorTryAgain && !sharePage,
+        [styleUtils["appear-third"]]: !errorTryAgain && sharePage,
       })}
-      onSubmit={e => {
-        if (formState === 'default') {
-          setFormState('loading');
-          register(email)
-            .then(async res => {
+      onSubmit={(e) => {
+        if (formState === "default") {
+          setFormState("loading")
+          register(name)
+            .then(async (res) => {
               if (!res.ok) {
-                throw new FormError(res);
+                throw new FormError(res)
               }
 
-              const data = await res.json();
+              const data = await res.json()
               const params = {
                 id: data.id,
                 ticketNumber: data.ticketNumber,
                 name: data.name,
-                username: data.username
-              };
+                username: data.username,
+              }
 
               if (sharePage) {
                 const queryString = Object.keys(params)
                   .map(
-                    key =>
+                    (key) =>
                       `${encodeURIComponent(key)}=${encodeURIComponent(
-                        params[key as keyof typeof params] || ''
-                      )}`
+                        params[key as keyof typeof params] || "",
+                      )}`,
                   )
-                  .join('&');
-                router.replace(`/?${queryString}`, '/');
+                  .join("&")
+                void router.replace(`/?${queryString}`, "/")
               } else {
-                setUserData(params);
-                setPageState('ticket');
+                setUserData(params)
+                setPageState("ticket")
               }
             })
-            .catch(async err => {
-              let message = 'Error! Please try again.';
+            .catch(async (err) => {
+              let message = "Error! Please try again."
 
               if (err instanceof FormError) {
-                const { res } = err;
-                const data = res.headers.get('Content-Type')?.includes('application/json')
+                const { res } = err
+                const data = res.headers.get("Content-Type")?.includes("application/json")
                   ? await res.json()
-                  : null;
+                  : null
 
-                if (data?.error?.code === 'bad_email') {
-                  message = 'Please enter a valid email';
+                if (data?.error?.code === "bad_name") {
+                  message = "Please enter a valid name"
                 }
               }
 
-              setErrorMsg(message);
-              setFormState('error');
-            });
+              setErrorMsg(message)
+              setFormState("error")
+            })
         } else {
-          setFormState('default');
+          setFormState("default")
         }
-        e.preventDefault();
+        e.preventDefault()
       }}
     >
-      <div className={styles['form-row']}>
+      <div className={styles["form-row"]}>
         <label
-          htmlFor="email-input-field"
-          className={cn(styles['input-label'], {
-            [styles.focused]: focused
+          htmlFor="name-input-field"
+          className={cn(styles["input-label"], {
+            [styles.focused]: focused,
           })}
         >
           <input
             className={styles.input}
             autoComplete="off"
-            type="email"
-            id="email-input-field"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
+            type="text"
+            id="name-input-field"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
-            placeholder="Enter email to register free"
-            aria-label="Your email address"
+            placeholder="Choose a user name to begin"
+            aria-label="Your name address"
             required
           />
         </label>
         <button
           type="submit"
           className={cn(styles.submit, styles.register, styles[formState])}
-          disabled={formState === 'loading'}
+          disabled={formState === "loading"}
         >
-          {formState === 'loading' ? <LoadingDots size={4} /> : <>Register</>}
+          {formState === "loading" ? <LoadingDots size={4} /> : <>Launch</>}
         </button>
       </div>
     </form>
-  );
+  )
 }

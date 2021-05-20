@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,32 +15,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Job, Sponsor, Stage, Speaker } from '@lib/types';
+import { Job, Sponsor, Zone, Speaker } from "@lib/types"
 
-const API_URL = 'https://gapi.storyblok.com/v1/api';
-const API_TOKEN = process.env.STORYBLOK_PREVIEW_TOKEN;
+const API_URL = "https://gapi.storyblok.com/v1/api"
+const API_TOKEN = process.env.STORYBLOK_PREVIEW_TOKEN
 
 /**
-* This transformResponse() function can be removed if you're using the 
-* Storyblok data directly. This transformation only happens to adapt the data
-* returned from the GraphQL api to the data structure used in the 
-* starter so as not to have to modify the component files. 
-*/
+ * This transformResponse() function can be removed if you're using the
+ * Storyblok data directly. This transformation only happens to adapt the data
+ * returned from the GraphQL api to the data structure used in the
+ * starter so as not to have to modify the component files.
+ */
 function transformResponse(response: any[], _speakers?: any) {
-  const content = response.map((r: any) => r.content ? r.content : r)
+  const content = response.map((r: any) => (r.content ? r.content : r))
   content.map((item: any) => {
-    Object.keys(item).map(key => {
+    Object.keys(item).map((key) => {
       // assign the urls directly if not an image
-      const noAssign = ['image', 'logo', 'cardImage']
-      if(item[key].url && noAssign.indexOf(key) === -1) {
+      const noAssign = ["image", "logo", "cardImage"]
+      if (item[key].url && noAssign.indexOf(key) === -1) {
         item[key] = item[key].url
       }
 
       // remove nesting from schedule and assign speakers
-      if(key === 'schedule') {
+      if (key === "schedule") {
         item[key] = item[key].map((slot: { content: any; speaker: any }) => {
           slot = slot.content
-          const speakers = _speakers?.filter((speaker: any) => slot.speaker.indexOf(speaker.uuid) !== -1)
+          const speakers = _speakers?.filter(
+            (speaker: any) => slot.speaker.indexOf(speaker.uuid) !== -1,
+          )
           slot.speaker = speakers
           return slot
         })
@@ -51,27 +53,30 @@ function transformResponse(response: any[], _speakers?: any) {
   return content
 }
 
-async function fetchCmsAPI(query: string, { variables }: { variables?: Record<string, any> } = {}) {
+async function fetchCmsAPI(
+  query: string,
+  { variables }: { variables?: Record<string, any> } = {},
+) {
   const res = await fetch(API_URL, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      Token: `${API_TOKEN}`
+      "Content-Type": "application/json",
+      Token: `${API_TOKEN}`,
     },
     body: JSON.stringify({
       query,
-      variables
-    })
-  });
+      variables,
+    }),
+  })
 
-  const json = await res.json();
+  const json = await res.json()
   if (json.errors) {
     // eslint-disable-next-line no-console
-    console.error(json.errors);
-    throw new Error('Failed to fetch API');
+    console.error(json.errors)
+    throw new Error("Failed to fetch API")
   }
 
-  return json.data;
+  return json.data
 }
 
 export async function getAllSpeakers(): Promise<Speaker[]> {
@@ -102,7 +107,7 @@ export async function getAllSpeakers(): Promise<Speaker[]> {
       }
     }
   }  
-  `);
+  `)
 
   const responseData = data.SpeakerItems.items.map((s: any) => {
     const speaker = s.content
@@ -111,14 +116,14 @@ export async function getAllSpeakers(): Promise<Speaker[]> {
     return speaker
   })
   const transformedData = transformResponse(responseData)
-  return transformedData;
+  return transformedData
 }
 
-export async function getAllStages(): Promise<Stage[]> {
-  const speakers = await getAllSpeakers();
+export async function getAllZones(): Promise<Zone[]> {
+  const speakers = await getAllSpeakers()
   const data = await fetchCmsAPI(`
     {
-      StageItems(per_page: 100) {
+      ZoneItems(per_page: 100) {
         items {
           content {
             name
@@ -136,9 +141,9 @@ export async function getAllStages(): Promise<Stage[]> {
         }
       }
     }
-  `);
+  `)
 
-  const transformedData = transformResponse(data.StageItems.items, speakers)
+  const transformedData = transformResponse(data.ZoneItems.items, speakers)
   return transformedData
 }
 
@@ -174,7 +179,7 @@ export async function getAllSponsors(): Promise<Sponsor[]> {
       }
     }
   }  
-  `);
+  `)
 
   const transformedData = transformResponse(data.CompanyItems.items)
   return transformedData
@@ -200,8 +205,8 @@ export async function getAllJobs(): Promise<Job[]> {
         }
       }
     }
-  `);
+  `)
 
   const transformedData = transformResponse(data.JobItems.items)
-  return transformedData;
+  return transformedData
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +22,10 @@ import { REPO } from '@lib/constants';
 export default function LearnMore() {
   return (
     <div className={cn(styleUtils.appear, styleUtils['appear-fifth'], styles.contact)}>
-      Learn more on{' '}
+      We build micro front ends!{' '}
       <a href={REPO} className={styles['contact-email']} target="_blank" rel="noopener noreferrer">
-        GitHub
+        Find Out How
       </a>
-      .
     </div>
   );
 }

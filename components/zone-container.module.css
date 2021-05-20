@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Vercel Inc.
+ * Copyright 2021 Watheia Labs, LLC.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@
   height: 215px;
 }
 
-.stageName {
+.zoneName {
   display: flex;
   font-size: 24px;
   color: #fff;
@@ -124,7 +124,7 @@
     align-items: center;
   }
 
-  .stageName {
+  .zoneName {
     font-size: var(--space-8x);
     margin-bottom: 0;
   }
