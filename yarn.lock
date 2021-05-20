@@ -3258,6 +3258,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"core-js@npm:^3.12.1":
+  version: 3.12.1
+  resolution: "core-js@npm:3.12.1"
+  checksum: 8b1d05579e7ddeafcd390001cc893540275fa3e658a00ae57f88954411a25bdfe583debb1929c6a50e40631cc07f2092490ea2284b35ffb922b23d7677060f28
+  languageName: node
+  linkType: hard
+
 "core-util-is@npm:~1.0.0":
   version: 1.0.2
   resolution: "core-util-is@npm:1.0.2"
@@ -7770,6 +7777,7 @@ fsevents@~2.3.1:
     classnames: 2.2.6
     clsx: latest
     cookie: 0.4.1
+    core-js: ^3.12.1
     date-fns: 2.16.1
     eslint: 7.15.0
     eslint-config-prettier: 7.0.0
