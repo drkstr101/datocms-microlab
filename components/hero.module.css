@@ -15,7 +15,8 @@
  */
 
 .wrapper {
-  margin-top: var(--space-12x);
+  margin-top: var(--space-6x);
+  max-width: 600px;
 }
 
 .hero {

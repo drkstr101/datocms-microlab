@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import cn from 'classnames';
-import styleUtils from './utils.module.css';
-import styles from './hero.module.css';
-import { BRAND_NAME, DATE, SITE_DESCRIPTION } from '@lib/constants';
+import cn from "classnames"
+import styleUtils from "./utils.module.css"
+import styles from "./hero.module.css"
+import { BRAND_NAME, DATE, SITE_DESCRIPTION } from "@lib/constants"
 
 export default function Hero() {
   return (
@@ -25,32 +25,32 @@ export default function Hero() {
       <h2
         className={cn(
           styleUtils.appear,
-          styleUtils['appear-third'],
-          styleUtils['show-on-mobile'],
-          styles.description
+          styleUtils["appear-third"],
+          styleUtils["show-on-mobile"],
+          styles.description,
         )}
       >
         by Watheia Labs
       </h2>
-      <h1 className={cn(styleUtils.appear, styleUtils['appear-third'], styles.hero)}>
+      <h1 className={cn(styleUtils.appear, styleUtils["appear-third"], styles.hero)}>
         Micro
-        <br className={styleUtils['show-on-desktop']} /> Frontends{' '}
+        <br className={styleUtils["show-on-desktop"]} /> Frontends{" "}
       </h1>
       <h2
         className={cn(
           styleUtils.appear,
-          styleUtils['appear-third'],
-          styleUtils['show-on-tablet'],
-          styles.description
+          styleUtils["appear-third"],
+          styleUtils["show-on-tablet"],
+          styles.description,
         )}
       >
         by Watheia Labs
       </h2>
-      <div className={cn(styleUtils.appear, styleUtils['appear-fourth'], styles.info)}>
+      <div className={cn(styleUtils.appear, styleUtils["appear-fourth"], styles.info)}>
         <p>{DATE}</p>
-        <div className={styles['description-separator']} />
-        <p style={{ color: '#215C94', fontWeight: 300 }}>[offline]</p>
+        <div className={styles["description-separator"]} />
+        <p style={{ color: "#215C94", fontWeight: 300 }}>[offline]</p>
       </div>
     </div>
-  );
+  )
 }

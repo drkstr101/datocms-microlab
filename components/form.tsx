@@ -100,7 +100,7 @@ export default function Form({ sharePage }: Props) {
                 void router.replace(`/?${queryString}`, "/")
               } else {
                 setUserData(params)
-                setPageState("ticket")
+                setPageState("online")
               }
             })
             .catch(async (err) => {

@@ -14,55 +14,49 @@
  * limitations under the License.
  */
 
-import { useState } from 'react';
-import { PageState, ConfDataContext, UserData } from '@lib/hooks/use-conf-data';
-import Ticket from './ticket';
-import Layout from './layout';
-import ConfContainer from './conf-container';
-import Hero from './hero';
-import Form from './form';
-import LearnMore from './learn-more';
+import { useState } from "react"
+import { PageState, ConfDataContext, UserData } from "@lib/hooks/use-conf-data"
+import Layout from "./layout"
+import ConfContainer from "./conf-container"
+import Hero from "./hero"
+import Form from "./form"
+import LearnMore from "./learn-more"
 
 type Props = {
-  defaultUserData: UserData;
-  sharePage?: boolean;
-  defaultPageState?: PageState;
-};
+  defaultUserData: UserData
+  sharePage?: boolean
+  defaultPageState?: PageState
+}
 
 export default function Conf({
   defaultUserData,
   sharePage,
-  defaultPageState = 'registration'
+  defaultPageState = "offline",
 }: Props) {
-  const [userData, setUserData] = useState<UserData>(defaultUserData);
-  const [pageState, setPageState] = useState<PageState>(defaultPageState);
+  const [userData, setUserData] = useState<UserData>(defaultUserData)
+  const [pageState, setPageState] = useState<PageState>(defaultPageState)
 
   return (
     <ConfDataContext.Provider
       value={{
         userData,
         setUserData,
-        setPageState
+        setPageState,
       }}
     >
       <Layout>
         <ConfContainer>
-          {pageState === 'registration' && !sharePage ? (
+          {pageState === "offline" && !sharePage ? (
             <>
               <Hero />
               <Form />
               <LearnMore />
             </>
           ) : (
-            <Ticket
-              username={userData.username}
-              name={userData.name}
-              ticketNumber={userData.ticketNumber}
-              sharePage={sharePage}
-            />
+            <p>loading...</p>
           )}
         </ConfContainer>
       </Layout>
     </ConfDataContext.Provider>
-  );
+  )
 }

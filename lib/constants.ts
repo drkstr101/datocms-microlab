@@ -43,28 +43,16 @@ export const REPO =
   "https://gitpod.io/#https://gitlab.com/watheia/nx-workspace/-/tree/master/"
 export const NAVIGATION = [
   {
-    name: "Zone D",
-    route: "/zone/m",
-  },
-  {
-    name: "Zone E",
-    route: "/zone/e",
-  },
-  {
-    name: "Projects",
-    route: "/schedule",
+    name: "Company",
+    route: "/Home",
   },
   {
     name: "Blog",
-    route: "/projects",
-  },
-  {
-    name: "Company",
-    route: "/expo",
+    route: "/blog",
   },
   {
     name: "Contact",
-    route: "/posts",
+    route: "/contact",
   },
 ]
 

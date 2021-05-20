@@ -40,7 +40,7 @@ export default function Conf() {
       <SkipNavContent />
       <ConfContent
         defaultUserData={defaultUserData}
-        defaultPageState={query.ticketNumber ? "ticket" : "registration"}
+        defaultPageState={query.ticketNumber ? "online" : "offline"}
       />
     </Page>
   )
