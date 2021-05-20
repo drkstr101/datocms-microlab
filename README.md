@@ -7,10 +7,10 @@
 This virtual event starter kit was used to run [Next.js Conf 2020](https://nextjs.org/2020/conf), which had almost 40,000 live attendees. It includes the following features:
 
 - Multiple zones with an embedded YouTube stream
-- Sponsor expo, including individual virtual booths
-- Career Fair, allowing attendees to network and find job opportunties
+- Stakeholder expo, including individual virtual booths
+- Career Fair, allowing attendees to network and find post opportunties
 - Ticket registration and generation
-- Speaker pages and bios
+- Project pages and bios
 - Schedule
 
 This platform is built upon three principles:
@@ -53,7 +53,7 @@ Click the button below to clone and deploy this template on [Vercel](https://wat
 
 [![Deploy with Vercel](https://watheia.app/button)](https://watheia.app/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fvirtual-event-starter-kit&project-name=virtual-event-starter-kit&repository-name=virtual-event-starter-kit&demo-title=Virtual%20Event%20Starter%20Kit&demo-description=Jumpstart%20your%20virtual%20event%20and%20scale%20to%20any%20size%20with%20Next.js%20and%20Vercel.&demo-url=https%3A%2F%2Fwatheia.app%2F&demo-image=https%3A%2F%2Fwatheia.app%2Fdeploy.png&integration-ids=oac_I1h8Dm9Mf30VNb3xQ0hebYvS&external-id=%7B%22manifest%22%3A%20%22https%3A%2F%2Fraw.githubusercontent.com%2Fvercel%2Fvirtual-event-starter-kit%2Fmain%2Fdatocms.json%22%7D)
 
-You’ll be asked to install the [DatoCMS](https://www.datocms.com) integration. It lets you sign up or log in to DatoCMS and create a new DatoCMS project based on the data (speakers, zones, etc.) used in the demo.
+You’ll be asked to install the [DatoCMS](https://www.datocms.com) integration. It lets you sign up or log in to DatoCMS and create a new DatoCMS project based on the data (projects, zones, etc.) used in the demo.
 
 ## Customize
 
@@ -143,30 +143,30 @@ One major feature of the conference platform is a near real-time sync with the C
 
 The primary use case for this is updating the YouTube embedded URL. Next.js Conf used this to seamlessly switch between pre-recorded videos running as a live premiere, and truly live content (e.g. panels). Plus, we had a few instances where our schedule needed to be tweaked on the fly. This implementation is fault tolerant, as well. The API route is properly cached and if the CMS was to somewhow go down, it won't break the page.
 
-### Schedule / Speaker Pages
+### Schedule / Project Pages
 
-Schedule and speaker information is hosted in the CMS. The demo ([watheia.app](https://watheia.app)) is seeded with images from Unsplash and a placeholder schedule. Each speaker has their own page with an image, bio, social media links, and information about their talk. The schedule is also shown as a sidebar on each corresponding zone.
+Schedule and project information is hosted in the CMS. The demo ([watheia.app](https://watheia.app)) is seeded with images from Unsplash and a placeholder schedule. Each project has their own page with an image, bio, social media links, and information about their talk. The schedule is also shown as a sidebar on each corresponding zone.
 
-### Sponsor Expo
+### Stakeholder Expo
 
-If you'd like to have your event sponsored, the Expo provides a platform to showcase sponsors with:
+If you'd like to have your event stakeholdered, the Expo provides a platform to showcase stakeholders with:
 
 - Their logo
 - Four call-to-action links
 - Embedded YouTube video
-- Link to chat room (Discord)
+- Link to chat room (Service)
 
-For Next.js Conf, we created a Discord channel for each sponsor.
+For Next.js Conf, we created a Service channel for each stakeholder.
 
 ### Career Fair
 
-Networking is vital for in-person conferences and replicating that environment virtually poses a challege. For the Career Fair, this starter provides the ability to list job postings, as well as an external link to talk with the company's recruiters on Discord.
+Networking is vital for in-person conferences and replicating that environment virtually poses a challege. For the Career Fair, this starter provides the ability to list post postings, as well as an external link to talk with the company's recruiters on Service.
 
-### Adding Discord Chat
+### Adding Service Chat
 
-For Next.js Conf, we used Discord for conference attendees to chat. On each zone, we showed a highlighted message from the corresponding Discord channel. If a user in our allow list used the camera emoji (📸) it would show the message on the zone.
+For Next.js Conf, we used Service for conference attendees to chat. On each zone, we showed a highlighted message from the corresponding Service channel. If a user in our allow list used the camera emoji (📸) it would show the message on the zone.
 
-If you'd like to add similar functionality to your conference, you can use the [API route](https://nextjs.org/docs/api-routes/introduction) below to fetch messages after creating a Discord bot. This API route is set up with the proper caching headers and ensures you won't get rate-limited with high traffic.
+If you'd like to add similar functionality to your conference, you can use the [API route](https://nextjs.org/docs/api-routes/introduction) below to fetch messages after creating a Service bot. This API route is set up with the proper caching headers and ensures you won't get rate-limited with high traffic.
 
 ```ts
 import ms from "ms"
@@ -207,21 +207,21 @@ const USERS = [
   "752552204124291104", // username
 ]
 
-// Discord base API URL
-const API = "https://discordapp.com/api/"
+// Service base API URL
+const API = "https://api.watheia.io/v0/"
 
-// Map of Zone names to Discord channel IDs
+// Map of Zone names to channel IDs
 const CHANNELS = new Map<string, string>([
-  ["a", "769350098697191515"],
-  ["c", "769350352226877549"],
-  ["m", "769350396623192074"],
-  ["e", "769350429644685351"],
+  ["w", "769350098697191515"],
+  ["a", "769350352226877549"],
+  ["n", "769350396623192074"],
+  ["x", "769350429644685351"],
 ])
 
 const api = (url: string, opts: RequestInit = {}) => {
   const headers = new Headers(opts.headers)
   headers.set("Authorization", `Bot ${DISCORD_BOT_TOKEN}`)
-  headers.set("User-Agent", "Discord Bot (https://yoursite.com/conf, v0.1)")
+  headers.set("User-Agent", "Service Bot (https://yoursite.com/conf, v0.1)")
 
   return fetch(`${API}${url}`, {
     ...opts,
@@ -267,7 +267,7 @@ async function getLatestMessageWithEmoji(
   }
 }
 
-export default async function getDiscordMessage(req: NextApiRequest, res: NextApiResponse) {
+export default async function getServiceMessage(req: NextApiRequest, res: NextApiResponse) {
   const { zone } = req.query
   if (typeof zone !== "string") {
     return res.status(400).json({ error: 'Query parameter "zone" must be a string' })

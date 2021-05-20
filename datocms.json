@@ -4,7 +4,7 @@
   "previewImage": "https://watheia.app/twitter-card.png",
   "datocmsProjectId": "37685",
   "deploymentType": "vercel",
-  "buildCommand": "npm run build",
+  "buildCommand": "yarn build",
   "datocmsApiTokenEnvName": "DATOCMS_READ_ONLY_API_TOKEN",
   "livePreviewUrl": "https://watheia.app/"
 }

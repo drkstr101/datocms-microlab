@@ -14,43 +14,60 @@
  * limitations under the License.
  */
 
-import { GetStaticProps } from "next"
+import { GetStaticProps, GetStaticPaths } from "next"
 
 import Page from "@components/page"
-import ProjectsGrid from "@components/projects-grid"
+import ProjectSection from "@components/projects-section"
 import Layout from "@components/layout"
-import Header from "@components/header"
 
 import { getAllProjects } from "@lib/cms-api"
 import { Project } from "@lib/types"
 import { META_DESCRIPTION } from "@lib/constants"
 
 type Props = {
-  projects: Project[]
+  project: Project
 }
 
-export default function Projects({ projects }: Props) {
+export default function ProjectPage({ project }: Props) {
   const meta = {
-    title: "Projects - Virtual Event Starter Kit",
+    title: "Demo - Virtual Event Starter Kit",
     description: META_DESCRIPTION,
   }
+
   return (
     <Page meta={meta}>
       <Layout>
-        <Header hero="Projects" description={meta.description} />
-        <ProjectsGrid projects={projects} />
+        <ProjectSection project={project} />
       </Layout>
     </Page>
   )
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
+export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+  const slug = params?.slug
   const projects = await getAllProjects()
+  const currentProject = projects.find((s: Project) => s.slug === slug) || null
+
+  if (!currentProject) {
+    return {
+      notFound: true,
+    }
+  }
 
   return {
     props: {
-      projects,
+      project: currentProject,
     },
     revalidate: 60,
+  }
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const projects = await getAllProjects()
+  const slugs = projects.map((s: Project) => ({ params: { slug: s.slug } }))
+
+  return {
+    paths: slugs,
+    fallback: false,
   }
 }

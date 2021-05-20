@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/require-await */
 /**
  * Copyright 2021 Watheia Labs, LLC.
  *
@@ -13,59 +14,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Job, Sponsor, Zone, Speaker } from "@lib/types"
+import { Post, Stakeholder, Zone, Project } from "@lib/types"
 
-import * as strapiApi from "./cms-providers/strapi"
-import * as agilityApi from "./cms-providers/agility"
-import * as datoCmsApi from "./cms-providers/dato"
-import * as contentfulApi from "./cms-providers/contentful"
-import * as prismicApi from "./cms-providers/prismic"
-import * as storyblokApi from "./cms-providers/storyblok"
+import * as datoCmsApi from "./dato"
 
-let cmsApi: {
-  getAllSpeakers: () => Promise<Speaker[]>
+export interface CmsApi {
+  getAllProjects: () => Promise<Project[]>
   getAllZones: () => Promise<Zone[]>
-  getAllSponsors: () => Promise<Sponsor[]>
-  getAllJobs: () => Promise<Job[]>
+  getAllStakeholders: () => Promise<Stakeholder[]>
+  getAllPosts: () => Promise<Post[]>
 }
 
-if (process.env.DATOCMS_READ_ONLY_API_TOKEN) {
-  cmsApi = datoCmsApi
-} else if (process.env.CONTENTFUL_ACCESS_TOKEN && process.env.CONTENTFUL_SPACE_ID) {
-  cmsApi = contentfulApi
-} else if (process.env.STORYBLOK_PREVIEW_TOKEN) {
-  cmsApi = storyblokApi
-} else if (process.env.PRISMIC_REPO_ID) {
-  cmsApi = prismicApi
-} else if (
-  process.env.AGILITY_GUID &&
-  process.env.AGILITY_API_FETCH_KEY &&
-  process.env.AGILITY_API_PREVIEW_KEY
-) {
-  cmsApi = agilityApi
-} else if (process.env.STRAPI_API_URL) {
-  cmsApi = strapiApi
-} else {
-  cmsApi = {
-    getAllSpeakers: async () => [],
-    getAllZones: async () => [],
-    getAllSponsors: async () => [],
-    getAllJobs: async () => [],
-  }
+// if (process.env.DATOCMS_READ_ONLY_API_TOKEN) {
+//   cmsApi = datoCmsApi
+// } else {
+const cmsApi: CmsApi = {
+  getAllProjects: async () => [],
+  getAllZones: async () => [],
+  getAllStakeholders: async () => [],
+  getAllPosts: async () => [],
 }
+// }
 
-export async function getAllSpeakers(): Promise<Speaker[]> {
-  return cmsApi.getAllSpeakers()
+export async function getAllProjects(): Promise<Project[]> {
+  return cmsApi.getAllProjects()
 }
 
 export async function getAllZones(): Promise<Zone[]> {
   return cmsApi.getAllZones()
 }
 
-export async function getAllSponsors(): Promise<Sponsor[]> {
-  return cmsApi.getAllSponsors()
+export async function getAllStakeholders(): Promise<Stakeholder[]> {
+  return cmsApi.getAllStakeholders()
 }
 
-export async function getAllJobs(): Promise<Job[]> {
-  return cmsApi.getAllJobs()
+export async function getAllPosts(): Promise<Post[]> {
+  return cmsApi.getAllPosts()
 }

@@ -58,7 +58,7 @@ export default function ZoneContainer({ zone, allZones }: Props) {
                 <h2 className={styles.stageName}>{zone.name}</h2>
               </div>
               <a
-                href={updatedZone.discord}
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.button}

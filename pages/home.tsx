@@ -17,39 +17,40 @@
 import { GetStaticProps } from "next"
 
 import Page from "@components/page"
-import ProjectsGrid from "@components/projects-grid"
-import Layout from "@components/layout"
+import StakeholdersGrid from "@components/stakeholders-grid"
 import Header from "@components/header"
+import Layout from "@components/layout"
 
-import { getAllProjects } from "@lib/cms-api"
-import { Project } from "@lib/types"
+import { getAllStakeholders } from "@lib/cms-api"
+import { Stakeholder } from "@lib/types"
 import { META_DESCRIPTION } from "@lib/constants"
 
 type Props = {
-  projects: Project[]
+  stakeholders: Stakeholder[]
 }
 
-export default function Projects({ projects }: Props) {
+export default function ExpoPage({ stakeholders }: Props) {
   const meta = {
-    title: "Projects - Virtual Event Starter Kit",
+    title: "Expo - Virtual Event Starter Kit",
     description: META_DESCRIPTION,
   }
+
   return (
     <Page meta={meta}>
       <Layout>
-        <Header hero="Projects" description={meta.description} />
-        <ProjectsGrid projects={projects} />
+        <Header hero="Expo" description={meta.description} />
+        <StakeholdersGrid stakeholders={stakeholders} />
       </Layout>
     </Page>
   )
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const projects = await getAllProjects()
+  const stakeholders = await getAllStakeholders()
 
   return {
     props: {
-      projects,
+      stakeholders,
     },
     revalidate: 60,
   }

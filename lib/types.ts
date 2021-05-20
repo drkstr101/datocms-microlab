@@ -18,7 +18,7 @@ export type Image = {
   url: string
 }
 
-export type Speaker = {
+export type Project = {
   name: string
   bio: string
   title: string
@@ -35,7 +35,6 @@ export type Zone = {
   name: string
   slug: string
   stream: string
-  discord: string
   schedule: Talk[]
 }
 
@@ -44,39 +43,37 @@ export type Talk = {
   description: string
   start: string
   end: string
-  speaker: Speaker[]
+  project: Project[]
 }
 
 export type Link = {
   url: string
 }
 
-export type Sponsor = {
+export type Stakeholder = {
   name: string
   description: string
   slug: string
   website: string
   callToAction: string
   callToActionLink: string
-  links: SponsorLink[]
-  discord: string
+  links: StakeholderLink[]
   tier: string
   cardImage: Image
   logo: Image
   youtubeSlug: string
 }
 
-export type SponsorLink = {
+export type StakeholderLink = {
   text: string
   url: string
 }
 
-export type Job = {
+export type Post = {
   id: string
   companyName: string
   title: string
   description: string
-  discord: string
   link: string
   rank: number
 }

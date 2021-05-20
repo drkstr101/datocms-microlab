@@ -14,34 +14,44 @@
  * limitations under the License.
  */
 
-import { useRouter } from "next/router"
-import { SkipNavContent } from "@reach/skip-nav"
+import { GetStaticProps } from "next"
 
 import Page from "@components/page"
-import ConfContent from "@components/index"
+import PostsGrid from "@components/posts-grid"
+import Layout from "@components/layout"
+import Header from "@components/header"
+
+import { getAllPosts } from "@lib/cms-api"
+import { Post } from "@lib/types"
 import { META_DESCRIPTION } from "@lib/constants"
 
-export default function Conf() {
-  const { query } = useRouter()
+type Props = {
+  posts: Post[]
+}
+
+export default function Posts({ posts }: Props) {
   const meta = {
-    title: "Micro Frontends by Watheia Labs",
+    title: "Career Fair - Virtual Event Starter Kit",
     description: META_DESCRIPTION,
-  }
-  const ticketNumber = query.ticketNumber?.toString()
-  const defaultUserData = {
-    id: query.id?.toString(),
-    ticketNumber: ticketNumber ? parseInt(ticketNumber, 10) : undefined,
-    name: query.name?.toString(),
-    username: query.username?.toString(),
   }
 
   return (
-    <Page meta={meta} fullViewport>
-      <SkipNavContent />
-      <ConfContent
-        defaultUserData={defaultUserData}
-        defaultPageState={query.ticketNumber ? "ticket" : "registration"}
-      />
+    <Page meta={meta}>
+      <Layout>
+        <Header hero="Career Fair" description={meta.description} />
+        <PostsGrid posts={posts} />
+      </Layout>
     </Page>
   )
+}
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const posts = await getAllPosts()
+
+  return {
+    props: {
+      posts,
+    },
+    revalidate: 60,
+  }
 }
