@@ -1,0 +1,131 @@
+/**
+ * this is the main configuration file of your bit workspace.
+ * for full documentation, please see: https://harmony-docs.bit.dev/workspace/configurations
+ **/ {
+  "$schema": "https://cdn.watheia.org/assets/micro.png",
+  /**
+   * main configuration of the Bit workspace.
+   **/
+  "teambit.workspace/workspace": {
+    /**
+     * the name of the component workspace. used for development purposes.
+     **/
+    "name": "watheia.pwa",
+    /**
+     * set the icon to be shown on the Bit server.
+     **/
+    "icon": "https://static.bit.dev/bit-logo.svg",
+    /**
+     * default directory for all components in workspace, the following placeholders are available:
+     * name - component name includes namespace, e.g. 'ui/button'.
+     * scopeId - full scope-id includes the owner, e.g. 'teambit.compilation'.
+     * scope - scope name only, e.g. 'compilation'.
+     * owner - owner name in bit.dev, e.g. 'teambit'.
+     **/
+    "defaultDirectory": "components/{scope}/{name}",
+    /**
+     * default scope for all components in workspace.
+     **/
+    "defaultScope": "watheia.pwa"
+  },
+  /**
+   * main configuration for component dependency resolution.
+   **/
+  "teambit.dependencies/dependency-resolver": {
+    /**
+     * choose the package manager for Bit to use. you can choose between 'yarn', 'pnpm'
+     */
+    "packageManager": "teambit.dependencies/yarn",
+    "policy": {
+      "dependencies": {
+        "@bit/bit.javascript.component.id": "^1.1.5",
+        "@types/node": "^14.0.0",
+        "@types/react": "^17.0.6",
+        "@types/react-dom": "^17.0.5",
+        "@types/yup": "^0.29.3",
+        "formik": "^1.5.8",
+        "typewriter-effect": "2.17.0",
+        "yup": "^0.32.9",
+        "@popperjs/core": "^2.0.0",
+        "react": "^17.0.0",
+        "react-dom": "^17.0.0",
+        "@types/chai": "^4.2.11",
+        "@types/lodash.debounce": "^4.0.6",
+        "@types/mocha": "^8.0.0",
+        "@types/react-onclickoutside": "^6.7.3",
+        "@types/react-slick": "^0.23.4",
+        "@types/sinon": "^10.0.0",
+        "chai": "^4.2.0",
+        "eslint-plugin-chai-friendly": "^0.7.1",
+        "mocha": "^8.0.1",
+        "next": "^10.2.0",
+        "sinon": "^10.0.0",
+        "@testing-library/jest-dom": "^5.11.1",
+        "@testing-library/react": "^11.2.7",
+        "@testing-library/user-event": "^13.1.9",
+        "@types/javascript-time-ago": "^2.0.1",
+        "classnames": "^2.2.6",
+        "javascript-time-ago": "^2.0.13",
+        "lodash.debounce": "^4.0.8",
+        "node-sass": "^5.0.0",
+        "number-abbreviate": "^2.0.0",
+        "path-browserify": "^1.0.1",
+        "rc-tooltip": "^5.1.1",
+        "react-create-ref": "^1.0.1",
+        "react-onclickoutside": "^6.9.0",
+        "react-slick": "^0.28.1",
+        "reset-css": "^5.0.1",
+        "resize-observer-polyfill": "^1.5.1",
+        "typescript": "^4.2.4",
+        "core-js": "3.7.0",
+        "graphql": "15.5.0",
+        "graphql-request": "3.4.0",
+        "url-parse": "1.5.1",
+        "use-deep-compare": "1.1.0"
+      },
+      "peerDependencies": {
+        "react": "^17.0.0",
+        "react-dom": "^17.0.0"
+      }
+    }
+  },
+  "teambit.ui-foundation/ui": {
+    "port": 5000,
+    // "portRange": [3003, 3100],
+    "host": "0.0.0.0",
+    "publicDir": "public/bit"
+  },
+  /**
+   * workspace variants allow to set different subsets of configuration for components in your workspace.
+   * this is extremely useful for upgrading, aligning and building components with a
+   * new set of dependencies.
+   **/
+  "teambit.workspace/variants": {
+    "*": {
+      "teambit.dependencies/dependency-resolver": {},
+      "teambit.pkg/pkg": {
+        "packageManagerPublishArgs": ["--access public"],
+        "packageJson": {
+          "name": "@watheia/pwa.{name}",
+          "private": false,
+          "repository": "watheia/pwa",
+          "author": "Aaron R Miller <amiller@watheia.org>",
+          "license": "EPL-2.0",
+          "homepage": "https://watheia.app/home",
+          "keywords": [
+            "watheia",
+            "app",
+            "micro",
+            "micro-component",
+            "web-component",
+            "micro-frontend",
+            "atomic-design",
+            "material-design",
+            "stencil"
+          ]
+        }
+      },
+      "teambit.react/react": {}
+    }
+  }
+}

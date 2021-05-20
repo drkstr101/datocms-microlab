@@ -5,7 +5,7 @@
   "private": true,
   "repository": "watheia/pwa",
   "author": "Watheia Labs, LLC.",
-  "homepage": "https://watheia.app/home",
+  "homepage": "https://watheia.pwa/home",
   "license": "Apache-2.0",
   "engines": {
     "node": "14.x"

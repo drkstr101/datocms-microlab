@@ -64,7 +64,7 @@ html {
   height: 100%;
   box-sizing: border-box;
   touch-action: manipulation;
-  font-feature-settings: 'case' 1, 'rlig' 1, 'calt' 0;
+  font-feature-settings: "case" 1, "rlig" 1, "calt" 0;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -82,13 +82,13 @@ body {
   height: 100%;
   margin: 0;
   line-height: 1.65;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: var(--text-md);
   font-weight: 400;
   min-width: 320px;
   direction: ltr;
-  font-feature-settings: 'kern';
+  font-feature-settings: "kern";
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -103,7 +103,7 @@ body {
   background-color: #092947;
   color: #fff;
 }
-[role='grid']:focus {
+[role="grid"]:focus {
   outline: none;
 }
 svg {
@@ -126,7 +126,7 @@ iframe {
   border: none;
 }
 
-a[role='button'] {
+a[role="button"] {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

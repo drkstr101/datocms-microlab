@@ -1,12 +1,12 @@
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/drkstr101/datocms-microlab)
 
-[![Deploy with Vercel](https://watheia.app/button)](https://watheia.app/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fvirtual-event-starter-kit&project-name=virtual-event-starter-kit&repository-name=virtual-event-starter-kit&demo-title=Virtual%20Event%20Starter%20Kit&demo-description=Jumpstart%20your%20virtual%20event%20and%20scale%20to%20any%20size%20with%20Next.js%20and%20Vercel.&demo-url=https%3A%2F%2Fwatheia.app%2F&demo-image=https%3A%2F%2Fwatheia.app%2Fdeploy.png&integration-ids=oac_I1h8Dm9Mf30VNb3xQ0hebYvS&external-id=%7B%22manifest%22%3A%20%22https%3A%2F%2Fraw.githubusercontent.com%2Fvercel%2Fvirtual-event-starter-kit%2Fmain%2Fdatocms.json%22%7D)
+[![Deploy with Vercel](https://watheia.pwa/button)](https://watheia.pwa/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fvirtual-event-starter-kit&project-name=virtual-event-starter-kit&repository-name=virtual-event-starter-kit&demo-title=Virtual%20Event%20Starter%20Kit&demo-description=Jumpstart%20your%20virtual%20event%20and%20scale%20to%20any%20size%20with%20Next.js%20and%20Vercel.&demo-url=https%3A%2F%2Fwatheia.pwa%2F&demo-image=https%3A%2F%2Fwatheia.pwa%2Fdeploy.png&integration-ids=oac_I1h8Dm9Mf30VNb3xQ0hebYvS&external-id=%7B%22manifest%22%3A%20%22https%3A%2F%2Fraw.githubusercontent.com%2Fvercel%2Fvirtual-event-starter-kit%2Fmain%2Fdatocms.json%22%7D)
 
-# [Virtual Event Starter Kit](https://watheia.app/virtual-event-starter-kit)
+# [Micro Frontend Starter Kit](https://watheia.pwa/virtual-event-starter-kit)
 
-### Demo: https://watheia.app
+### Demo: https://watheia.pwa
 
-This virtual event starter kit was used to run [Next.js Conf 2020](https://nextjs.org/2020/conf), which had almost 40,000 live attendees. It includes the following features:
+This micro frontend starter kit was used to run [Next.js Conf 2020](https://nextjs.org/2020/conf), which had almost 40,000 live attendees. It includes the following features:
 
 - Multiple zones with an embedded YouTube stream
 - Stakeholder expo, including individual virtual booths
@@ -28,7 +28,7 @@ This platform is built upon three principles:
   - [TypeScript](https://nextjs.org/docs/basic-features/typescript)
 - CMS: [Multiple Options](#cms)
 - Videos: [YouTube](https://www.youtube.com)
-- Deployment: [Vercel](https://watheia.app)
+- Deployment: [Vercel](https://watheia.pwa)
 - Authentication: [GitHub OAuth](https://docs.github.com/en/free-pro-team@latest/developers/apps/authorizing-oauth-apps)
 - Database: [Redis](https://redis.io)
 
@@ -51,9 +51,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Clone and Deploy
 
-Click the button below to clone and deploy this template on [Vercel](https://watheia.app/).
+Click the button below to clone and deploy this template on [Vercel](https://watheia.pwa/).
 
-[![Deploy with Vercel](https://watheia.app/button)](https://watheia.app/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fvirtual-event-starter-kit&project-name=virtual-event-starter-kit&repository-name=virtual-event-starter-kit&demo-title=Virtual%20Event%20Starter%20Kit&demo-description=Jumpstart%20your%20virtual%20event%20and%20scale%20to%20any%20size%20with%20Next.js%20and%20Vercel.&demo-url=https%3A%2F%2Fwatheia.app%2F&demo-image=https%3A%2F%2Fwatheia.app%2Fdeploy.png&integration-ids=oac_I1h8Dm9Mf30VNb3xQ0hebYvS&external-id=%7B%22manifest%22%3A%20%22https%3A%2F%2Fraw.githubusercontent.com%2Fvercel%2Fvirtual-event-starter-kit%2Fmain%2Fdatocms.json%22%7D)
+[![Deploy with Vercel](https://watheia.pwa/button)](https://watheia.pwa/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fvirtual-event-starter-kit&project-name=virtual-event-starter-kit&repository-name=virtual-event-starter-kit&demo-title=Virtual%20Event%20Starter%20Kit&demo-description=Jumpstart%20your%20virtual%20event%20and%20scale%20to%20any%20size%20with%20Next.js%20and%20Vercel.&demo-url=https%3A%2F%2Fwatheia.pwa%2F&demo-image=https%3A%2F%2Fwatheia.pwa%2Fdeploy.png&integration-ids=oac_I1h8Dm9Mf30VNb3xQ0hebYvS&external-id=%7B%22manifest%22%3A%20%22https%3A%2F%2Fraw.githubusercontent.com%2Fvercel%2Fvirtual-event-starter-kit%2Fmain%2Fdatocms.json%22%7D)
 
 You’ll be asked to install the [DatoCMS](https://www.datocms.com) integration. It lets you sign up or log in to DatoCMS and create a new DatoCMS project based on the data (projects, zones, etc.) used in the demo.
 
@@ -61,9 +61,9 @@ You’ll be asked to install the [DatoCMS](https://www.datocms.com) integration.
 
 ### CMS
 
-Environment variables determine which CMS to use. See [`lib/cms-api.ts`](lib/cms-api.ts) for details and `.env.local.example` for all environment variables. The demo ([watheia.app](https://watheia.app)) uses DatoCMS, but we also have support for:
+Environment variables determine which CMS to use. See [`lib/cms-api.ts`](lib/cms-api.ts) for details and `.env.local.example` for all environment variables. The demo ([watheia.pwa](https://watheia.pwa)) uses DatoCMS, but we also have support for:
 
-- [Agility](https://watheia.app/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fvirtual-event-starter-kit&project-name=virtual-event-starter-kit&repository-name=virtual-event-starter-kit&demo-title=Virtual%20Event%20Starter%20Kit&demo-description=Jumpstart%20your%20virtual%20event%20and%20scale%20to%20any%20size%20with%20Next.js%20and%20Vercel.&demo-url=https%3A%2F%2Fwatheia.app%2F&demo-image=https%3A%2F%2Fwatheia.app%2Fdeploy.png&integration-ids=oac_Dnqk9CoC6rZ18k9nVR9KresV&external-id=%7B%22manifest%22%3A%20%22https%3A%2F%2Fraw.githubusercontent.com%2Fvercel%2Fvirtual-event-starter-kit%2Fmain%2Fdatocms.json%22%2C%20%22githubRepo%22%3A%20%22vercel%2Fvirtual-event-starter-kit%22%7D)
+- [Agility](https://watheia.pwa/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fvirtual-event-starter-kit&project-name=virtual-event-starter-kit&repository-name=virtual-event-starter-kit&demo-title=Virtual%20Event%20Starter%20Kit&demo-description=Jumpstart%20your%20virtual%20event%20and%20scale%20to%20any%20size%20with%20Next.js%20and%20Vercel.&demo-url=https%3A%2F%2Fwatheia.pwa%2F&demo-image=https%3A%2F%2Fwatheia.pwa%2Fdeploy.png&integration-ids=oac_Dnqk9CoC6rZ18k9nVR9KresV&external-id=%7B%22manifest%22%3A%20%22https%3A%2F%2Fraw.githubusercontent.com%2Fvercel%2Fvirtual-event-starter-kit%2Fmain%2Fdatocms.json%22%2C%20%22githubRepo%22%3A%20%22vercel%2Fvirtual-event-starter-kit%22%7D)
 - [Contentful](lib/cms-providers/contentful.ts)
 - [Prismic](lib/cms-providers/prismic/index.ts) ([Instructions](lib/cms-providers/prismic/README.md))
 - [Sanity](https://create.sanity.io/?template=sanity-io%2Fsanity-template-nextjs-event-starter)
@@ -76,7 +76,7 @@ Environment variables determine which CMS to use. See [`lib/cms-api.ts`](lib/cms
 
 ## Authentication and Database
 
-Some features won’t work until you set up authentication and database. The demo ([watheia.app](https://watheia.app)) uses [GitHub OAuth](https://docs.github.com/en/free-pro-team@latest/developers/apps/creating-an-oauth-app) for authentication and [Redis](https://redis.io/) for database. You can use different providers as you see fit.
+Some features won’t work until you set up authentication and database. The demo ([watheia.pwa](https://watheia.pwa)) uses [GitHub OAuth](https://docs.github.com/en/free-pro-team@latest/developers/apps/creating-an-oauth-app) for authentication and [Redis](https://redis.io/) for database. You can use different providers as you see fit.
 
 ### Authentication
 
@@ -100,7 +100,7 @@ Once it’s set up, sign up using the registration form on the home page (not on
 #### On Vercel:
 
 - Set the Authorization Callback URL as `<your deployment’s URL>/api/github-oauth` on GitHub.
-- Set `NEXT_PUBLIC_GITHUB_OAUTH_CLIENT_ID` and `GITHUB_OAUTH_CLIENT_SECRET` on [Vercel Project Environment Variables Settings](https://watheia.app/docs/environment-variables) for the production environment.
+- Set `NEXT_PUBLIC_GITHUB_OAUTH_CLIENT_ID` and `GITHUB_OAUTH_CLIENT_SECRET` on [Vercel Project Environment Variables Settings](https://watheia.pwa/docs/environment-variables) for the production environment.
 - Edit `SITE_URL` in `lib/constants.ts` to match your deployment’s URL (no trailing slash).
 - Push the code to redeploy the Project on Vercel.
 
@@ -111,7 +111,7 @@ You need a database to save user data and enable the following features:
 - Generating a unique ticket number for each email when signing up on the registration form. If DB is not set up, it’ll always be `1234`.
 - Generating a unique ticket image or ticket URL after signing in with GitHub. If DB is not set up, each ticket image or URL will show generic data.
 
-The demo ([watheia.app](https://watheia.app)) uses [Redis](https://redis.io/), but you can customize it to use any database you like.
+The demo ([watheia.pwa](https://watheia.pwa)) uses [Redis](https://redis.io/), but you can customize it to use any database you like.
 
 #### Running Redis Locally
 
@@ -133,7 +133,7 @@ REDIS_EMAIL_TO_ID_SECRET=foo # Come up with your own secret string
 
 #### Using Redis On Vercel
 
-Provision your own Redis instance and set `REDIS_PORT`, `REDIS_URL`, `REDIS_PASSWORD`, and `REDIS_EMAIL_TO_ID_SECRET` (come up with your own secret string) on [Vercel Project Environment Variables Settings](https://watheia.app/docs/environment-variables) for the production environment.
+Provision your own Redis instance and set `REDIS_PORT`, `REDIS_URL`, `REDIS_PASSWORD`, and `REDIS_EMAIL_TO_ID_SECRET` (come up with your own secret string) on [Vercel Project Environment Variables Settings](https://watheia.pwa/docs/environment-variables) for the production environment.
 
 ## More Details
 
@@ -147,7 +147,7 @@ The primary use case for this is updating the YouTube embedded URL. Next.js Conf
 
 ### Schedule / Project Pages
 
-Schedule and project information is hosted in the CMS. The demo ([watheia.app](https://watheia.app)) is seeded with images from Unsplash and a placeholder schedule. Each project has their own page with an image, bio, social media links, and information about their talk. The schedule is also shown as a sidebar on each corresponding zone.
+Schedule and project information is hosted in the CMS. The demo ([watheia.pwa](https://watheia.pwa)) is seeded with images from Unsplash and a placeholder schedule. Each project has their own page with an image, bio, social media links, and information about their talk. The schedule is also shown as a sidebar on each corresponding zone.
 
 ### Stakeholder Expo
 
@@ -319,4 +319,4 @@ export default async function getServiceMessage(req: NextApiRequest, res: NextAp
 
 ### Demo
 
-The demo is available at https://watheia.app. The data recorded or used on the demo may be removed by Vercel at any point.
+The demo is available at https://watheia.pwa. The data recorded or used on the demo may be removed by Vercel at any point.

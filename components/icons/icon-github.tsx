@@ -15,11 +15,11 @@
  */
 
 type Props = {
-  color: string;
-  size: number;
-};
+  color: string
+  size: number
+}
 
-export default function IconGithub({ color = '#111111', size = 22 }: Props) {
+export default function IconGithub({ color = "#111111", size = 22 }: Props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -46,5 +46,5 @@ export default function IconGithub({ color = '#111111', size = 22 }: Props) {
         </clipPath>
       </defs>
     </svg>
-  );
+  )
 }

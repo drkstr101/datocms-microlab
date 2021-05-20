@@ -31,7 +31,7 @@ type Props = {
 
 export default function SchedulePage({ allZones }: Props) {
   const meta = {
-    title: "Schedule - Virtual Event Starter Kit",
+    title: "Schedule - Micro Frontend Starter Kit",
     description: META_DESCRIPTION,
   }
 
