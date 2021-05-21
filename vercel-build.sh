@@ -8,5 +8,4 @@ npm install --global yarn @teambit/bvm && \
     bit config set no_warnings true && \
     bit init --harmony && \
     bit install && \
-    yarn next build && \
-    yarn next export
+    yarn next build
