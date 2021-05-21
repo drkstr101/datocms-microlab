@@ -30,7 +30,7 @@ type Props = {
 
 export default function StakeholderPage({ stakeholder }: Props) {
   const meta = {
-    title: "Demo - Virtual Event Starter Kit",
+    title: "Demo - Micro Frontend Starter Kit",
     description: META_DESCRIPTION,
   }
 

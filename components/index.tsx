@@ -18,7 +18,7 @@ import { useState } from "react"
 import { PageState, ConfDataContext, UserData } from "@lib/hooks/use-conf-data"
 import Layout from "./layout"
 import ConfContainer from "./conf-container"
-import Hero from "./hero"
+import { Hero } from "@watheia/pwa.sections.enterprise-offering.hero"
 import Form from "./form"
 import LearnMore from "./learn-more"
 

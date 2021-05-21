@@ -14,18 +14,23 @@
  * limitations under the License.
  */
 
-import cn from 'classnames';
-import styleUtils from './utils.module.css';
-import styles from './contact.module.css';
-import { REPO } from '@lib/constants';
+import cn from "classnames"
+import styleUtils from "./utils.module.css"
+import styles from "./contact.module.css"
+import { REPO } from "@lib/constants"
 
 export default function LearnMore() {
   return (
-    <div className={cn(styleUtils.appear, styleUtils['appear-fifth'], styles.contact)}>
-      We build micro front ends!{' '}
-      <a href={REPO} className={styles['contact-email']} target="_blank" rel="noopener noreferrer">
+    <div className={cn(styleUtils.appear, styleUtils["appear-fifth"], styles.contact)}>
+      We build micro front ends!{" "}
+      <a
+        href={REPO}
+        className={styles["contact-email"]}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Find Out How
       </a>
     </div>
-  );
+  )
 }

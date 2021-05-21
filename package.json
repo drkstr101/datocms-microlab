@@ -5,7 +5,7 @@
   "private": true,
   "repository": "watheia/pwa",
   "author": "Watheia Labs, LLC.",
-  "homepage": "https://watheia.app/home",
+  "homepage": "https://watheia.pwa/home",
   "license": "Apache-2.0",
   "engines": {
     "node": "14.x"
@@ -29,6 +29,7 @@
     "classnames": "2.2.6",
     "clsx": "latest",
     "cookie": "0.4.1",
+    "core-js": "^3.12.1",
     "date-fns": "2.16.1",
     "htmlescape": "1.1.1",
     "intersection-observer": "0.12.0",

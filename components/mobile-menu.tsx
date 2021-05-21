@@ -14,38 +14,51 @@
  * limitations under the License.
  */
 
-import { useRef } from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import cn from 'classnames';
-import { NAVIGATION } from '@lib/constants';
-import { useOverlayTriggerState } from '@react-stately/overlays';
-import { useOverlay, usePreventScroll, useModal, OverlayContainer } from '@react-aria/overlays';
-import { useDialog } from '@react-aria/dialog';
-import { FocusScope } from '@react-aria/focus';
-import { useButton } from '@react-aria/button';
-import styles from './mobile-menu.module.css';
+import { useRef } from "react"
+import { useRouter } from "next/router"
+import Link from "next/link"
+import cn from "classnames"
+import { NAVIGATION } from "@lib/constants"
+import { useOverlayTriggerState } from "@react-stately/overlays"
+import {
+  useOverlay,
+  usePreventScroll,
+  useModal,
+  OverlayContainer,
+} from "@react-aria/overlays"
+import { useDialog } from "@react-aria/dialog"
+import { FocusScope } from "@react-aria/focus"
+import { useButton } from "@react-aria/button"
+import styles from "./mobile-menu.module.css"
 
-function ModalDialog(props: Parameters<typeof useOverlay>[0] & Parameters<typeof useDialog>[0]) {
-  const router = useRouter();
-  const activeRoute = router.asPath;
+function ModalDialog(
+  props: Parameters<typeof useOverlay>[0] & Parameters<typeof useDialog>[0],
+) {
+  const router = useRouter()
+  const activeRoute = router.asPath
 
-  const ref = useRef<HTMLElement | null>(null);
-  const { modalProps } = useModal();
-  const { overlayProps } = useOverlay(props, ref);
-  const { dialogProps } = useDialog(props, ref);
+  const ref = useRef<HTMLElement | null>(null)
+  const { modalProps } = useModal()
+  const { overlayProps } = useOverlay(props, ref)
+  const { dialogProps } = useDialog(props, ref)
 
-  usePreventScroll();
+  usePreventScroll()
 
   return (
-    <div className={styles['nav-overlay']}>
+    <div className={styles["nav-overlay"]}>
       <FocusScope contain restoreFocus autoFocus>
-        <nav className={styles.nav} {...overlayProps} {...dialogProps} {...modalProps} ref={ref}>
+        <nav
+          className={styles.nav}
+          {...overlayProps}
+          {...dialogProps}
+          {...modalProps}
+          ref={ref}
+        >
           {NAVIGATION.map(({ name, route }) => (
             <Link key={name} href={route}>
               <a
-                className={cn(styles['nav-item'], {
-                  [styles['nav-active']]: activeRoute.startsWith(route)
+                className={cn(styles["nav-item"], {
+                  [styles["nav-active"]]: activeRoute.startsWith(route),
                 })}
               >
                 {name}
@@ -55,18 +68,18 @@ function ModalDialog(props: Parameters<typeof useOverlay>[0] & Parameters<typeof
         </nav>
       </FocusScope>
     </div>
-  );
+  )
 }
 
 export default function Overlay() {
-  const state = useOverlayTriggerState({});
-  const ref = useRef<HTMLButtonElement | null>(null);
+  const state = useOverlayTriggerState({})
+  const ref = useRef<HTMLButtonElement | null>(null)
   const { buttonProps } = useButton(
     {
-      onPress: () => (state.isOpen ? state.close() : state.open())
+      onPress: () => (state.isOpen ? state.close() : state.open()),
     },
-    ref
-  );
+    ref,
+  )
 
   return (
     <>
@@ -118,5 +131,5 @@ export default function Overlay() {
         </OverlayContainer>
       )}
     </>
-  );
+  )
 }

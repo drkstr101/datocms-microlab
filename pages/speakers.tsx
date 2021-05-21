@@ -31,7 +31,7 @@ type Props = {
 
 export default function Projects({ projects }: Props) {
   const meta = {
-    title: "Projects - Virtual Event Starter Kit",
+    title: "Projects - Micro Frontend Starter Kit",
     description: META_DESCRIPTION,
   }
   return (
