@@ -1,25 +1,16 @@
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/drkstr101/datocms-microlab)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/watheia/app)
 
-[![Deploy with Vercel](https://watheia.pwa/button)](https://watheia.pwa/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fvirtual-event-starter-kit&project-name=virtual-event-starter-kit&repository-name=virtual-event-starter-kit&demo-title=Virtual%20Event%20Starter%20Kit&demo-description=Jumpstart%20your%20virtual%20event%20and%20scale%20to%20any%20size%20with%20Next.js%20and%20Vercel.&demo-url=https%3A%2F%2Fwatheia.pwa%2F&demo-image=https%3A%2F%2Fwatheia.pwa%2Fdeploy.png&integration-ids=oac_I1h8Dm9Mf30VNb3xQ0hebYvS&external-id=%7B%22manifest%22%3A%20%22https%3A%2F%2Fraw.githubusercontent.com%2Fvercel%2Fvirtual-event-starter-kit%2Fmain%2Fdatocms.json%22%7D)
+# [Micro Frontend Starter Kit](https://watheia.app/virtual-event-starter-kit)
 
-# [Micro Frontend Starter Kit](https://watheia.pwa/virtual-event-starter-kit)
+### Demo: https://watheia.app
 
-### Demo: https://watheia.pwa
-
-This micro frontend starter kit was used to run [Next.js Conf 2020](https://nextjs.org/2020/conf), which had almost 40,000 live attendees. It includes the following features:
-
-- Multiple zones with an embedded YouTube stream
-- Stakeholder expo, including individual virtual booths
-- Career Fair, allowing attendees to network and find post opportunties
-- Ticket registration and generation
-- Project pages and bios
-- Schedule
+![Micro Brand](https://cdn.watheia.org/assets/micro.png)
 
 This platform is built upon three principles:
 
-- **Delegation:** Running a conference is difficult – you have to **delegate** tasks to third-parties to ensure success. Certain elements of an online conference experience are tough to get right, and we'd rather lean on established, industry leading solutions.
-- **Flexibility:** While delegating certain elements of the conference experience is helpful, it's also important to own the platform. That's why this template provides a **flexible** open-source codebase that can be modified for your event.
-- **Reducing Risk:** It's inevitable something will go wrong during your event. This platform **reduces risk** by leaning on a dynamic site that outputs as static files using [Incremental Static Generation](https://nextjs.org/docs/basic-features/data-fetching). These static files are cached, ensuring your site is never down. Then, it uses [API Routes](https://nextjs.org/docs/api-routes/introduction) to sprinkle dynamic content on top, which are hosted by a provider with 99.99% uptime.
+- **Delegation:** Building microfrontends are difficult – you have to **delegate** tasks to third-parties to ensure success. Certain elements of an online frontend experience are tough to get right, and we'd rather lean on established, industry leading solutions.
+- **Flexibility:** While delegating certain elements of the frontend experience is helpful, it's also important to own the platform. That's why this template provides a **flexible** open-source codebase that can be modified for your event.
+- **Reducing Risk:** It's inevitable something will go wrong during your deployment. This platform **reduces risk** by leaning on a dynamic site that outputs as static files using [Incremental Static Generation](https://nextjs.org/docs/basic-features/data-fetching). These static files are cached, ensuring your site is never down. Then, it uses [API Routes](https://nextjs.org/docs/api-routes/introduction) to sprinkle dynamic content on top, which are hosted by a provider with 99.99% uptime.
 
 ### Built With
 
@@ -28,7 +19,7 @@ This platform is built upon three principles:
   - [TypeScript](https://nextjs.org/docs/basic-features/typescript)
 - CMS: [Multiple Options](#cms)
 - Videos: [YouTube](https://www.youtube.com)
-- Deployment: [Vercel](https://watheia.pwa)
+- Deployment: [Vercel](https://watheia.app)
 - Authentication: [GitHub OAuth](https://docs.github.com/en/free-pro-team@latest/developers/apps/authorizing-oauth-apps)
 - Database: [Redis](https://redis.io)
 
@@ -49,26 +40,9 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Clone and Deploy
-
-Click the button below to clone and deploy this template on [Vercel](https://watheia.pwa/).
-
-[![Deploy with Vercel](https://watheia.pwa/button)](https://watheia.pwa/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fvirtual-event-starter-kit&project-name=virtual-event-starter-kit&repository-name=virtual-event-starter-kit&demo-title=Virtual%20Event%20Starter%20Kit&demo-description=Jumpstart%20your%20virtual%20event%20and%20scale%20to%20any%20size%20with%20Next.js%20and%20Vercel.&demo-url=https%3A%2F%2Fwatheia.pwa%2F&demo-image=https%3A%2F%2Fwatheia.pwa%2Fdeploy.png&integration-ids=oac_I1h8Dm9Mf30VNb3xQ0hebYvS&external-id=%7B%22manifest%22%3A%20%22https%3A%2F%2Fraw.githubusercontent.com%2Fvercel%2Fvirtual-event-starter-kit%2Fmain%2Fdatocms.json%22%7D)
-
-You’ll be asked to install the [DatoCMS](https://www.datocms.com) integration. It lets you sign up or log in to DatoCMS and create a new DatoCMS project based on the data (projects, zones, etc.) used in the demo.
-
-## Customize
-
 ### CMS
 
-Environment variables determine which CMS to use. See [`lib/cms-api.ts`](lib/cms-api.ts) for details and `.env.local.example` for all environment variables. The demo ([watheia.pwa](https://watheia.pwa)) uses DatoCMS, but we also have support for:
-
-- [Agility](https://watheia.pwa/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fvirtual-event-starter-kit&project-name=virtual-event-starter-kit&repository-name=virtual-event-starter-kit&demo-title=Virtual%20Event%20Starter%20Kit&demo-description=Jumpstart%20your%20virtual%20event%20and%20scale%20to%20any%20size%20with%20Next.js%20and%20Vercel.&demo-url=https%3A%2F%2Fwatheia.pwa%2F&demo-image=https%3A%2F%2Fwatheia.pwa%2Fdeploy.png&integration-ids=oac_Dnqk9CoC6rZ18k9nVR9KresV&external-id=%7B%22manifest%22%3A%20%22https%3A%2F%2Fraw.githubusercontent.com%2Fvercel%2Fvirtual-event-starter-kit%2Fmain%2Fdatocms.json%22%2C%20%22githubRepo%22%3A%20%22vercel%2Fvirtual-event-starter-kit%22%7D)
-- [Contentful](lib/cms-providers/contentful.ts)
-- [Prismic](lib/cms-providers/prismic/index.ts) ([Instructions](lib/cms-providers/prismic/README.md))
-- [Sanity](https://create.sanity.io/?template=sanity-io%2Fsanity-template-nextjs-event-starter)
-- [Storyblok](lib/cms-providers/storyblok.ts)
-  - Click the following link to create the space for this starter kit in Storyblok: [Create Event Space](https://app.storyblok.com/#!/build/101757)
+Environment variables determine which CMS to use. See [`lib/cms-api.ts`](lib/cms-api.ts) for details and `.env.local.example` for all environment variables. The demo ([watheia.pwa](https://watheia.app)) uses DatoCMS, but we also have support for:
 
 ### Constants
 
@@ -76,7 +50,7 @@ Environment variables determine which CMS to use. See [`lib/cms-api.ts`](lib/cms
 
 ## Authentication and Database
 
-Some features won’t work until you set up authentication and database. The demo ([watheia.pwa](https://watheia.pwa)) uses [GitHub OAuth](https://docs.github.com/en/free-pro-team@latest/developers/apps/creating-an-oauth-app) for authentication and [Redis](https://redis.io/) for database. You can use different providers as you see fit.
+Some features won’t work until you set up authentication and database. The demo ([watheia.pwa](https://watheia.app)) uses [GitHub OAuth](https://docs.github.com/en/free-pro-team@latest/developers/apps/creating-an-oauth-app) for authentication and [Redis](https://redis.io/) for database. You can use different providers as you see fit.
 
 ### Authentication
 
@@ -100,7 +74,7 @@ Once it’s set up, sign up using the registration form on the home page (not on
 #### On Vercel:
 
 - Set the Authorization Callback URL as `<your deployment’s URL>/api/github-oauth` on GitHub.
-- Set `NEXT_PUBLIC_GITHUB_OAUTH_CLIENT_ID` and `GITHUB_OAUTH_CLIENT_SECRET` on [Vercel Project Environment Variables Settings](https://watheia.pwa/docs/environment-variables) for the production environment.
+- Set `NEXT_PUBLIC_GITHUB_OAUTH_CLIENT_ID` and `GITHUB_OAUTH_CLIENT_SECRET` on [Vercel Project Environment Variables Settings](https://watheia.app/docs/environment-variables) for the production environment.
 - Edit `SITE_URL` in `lib/constants.ts` to match your deployment’s URL (no trailing slash).
 - Push the code to redeploy the Project on Vercel.
 
@@ -111,7 +85,7 @@ You need a database to save user data and enable the following features:
 - Generating a unique ticket number for each email when signing up on the registration form. If DB is not set up, it’ll always be `1234`.
 - Generating a unique ticket image or ticket URL after signing in with GitHub. If DB is not set up, each ticket image or URL will show generic data.
 
-The demo ([watheia.pwa](https://watheia.pwa)) uses [Redis](https://redis.io/), but you can customize it to use any database you like.
+The demo ([watheia.pwa](https://watheia.app)) uses [Redis](https://redis.io/), but you can customize it to use any database you like.
 
 #### Running Redis Locally
 
@@ -133,21 +107,21 @@ REDIS_EMAIL_TO_ID_SECRET=foo # Come up with your own secret string
 
 #### Using Redis On Vercel
 
-Provision your own Redis instance and set `REDIS_PORT`, `REDIS_URL`, `REDIS_PASSWORD`, and `REDIS_EMAIL_TO_ID_SECRET` (come up with your own secret string) on [Vercel Project Environment Variables Settings](https://watheia.pwa/docs/environment-variables) for the production environment.
+Provision your own Redis instance and set `REDIS_PORT`, `REDIS_URL`, `REDIS_PASSWORD`, and `REDIS_EMAIL_TO_ID_SECRET` (come up with your own secret string) on [Vercel Project Environment Variables Settings](https://watheia.app/docs/environment-variables) for the production environment.
 
 ## More Details
 
 ### Zones
 
-There are four different zones included in the seed data. Feel free to add or remove these based on your schedule. Each zone requires the user to enter their email to register with the conference before entering the event. After successfully entering their email and saving the user with your database of choice, the user is able to view the embedded YouTube stream. The login state is persisted as a `httponly` cookie.
+There are four different zones included in the seed data. Feel free to add or remove these based on your schedule. Each zone requires the user to enter their email to register with the frontend before entering the event. After successfully entering their email and saving the user with your database of choice, the user is able to view the embedded YouTube stream. The login state is persisted as a `httponly` cookie.
 
-One major feature of the conference platform is a near real-time sync with the CMS. Every five seconds, the zone queries `/api/zones` to fetch the latest information from the CMS. This allows you to make changes on the fly, without the user having the refresh the page. No need for websockets.
+One major feature of the frontend platform is a near real-time sync with the CMS. Every five seconds, the zone queries `/api/zones` to fetch the latest information from the CMS. This allows you to make changes on the fly, without the user having the refresh the page. No need for websockets.
 
 The primary use case for this is updating the YouTube embedded URL. Next.js Conf used this to seamlessly switch between pre-recorded videos running as a live premiere, and truly live content (e.g. panels). Plus, we had a few instances where our schedule needed to be tweaked on the fly. This implementation is fault tolerant, as well. The API route is properly cached and if the CMS was to somewhow go down, it won't break the page.
 
 ### Schedule / Project Pages
 
-Schedule and project information is hosted in the CMS. The demo ([watheia.pwa](https://watheia.pwa)) is seeded with images from Unsplash and a placeholder schedule. Each project has their own page with an image, bio, social media links, and information about their talk. The schedule is also shown as a sidebar on each corresponding zone.
+Schedule and project information is hosted in the CMS. The demo ([watheia.pwa](https://watheia.app)) is seeded with images from Unsplash and a placeholder schedule. Each project has their own page with an image, bio, social media links, and information about their talk. The schedule is also shown as a sidebar on each corresponding zone.
 
 ### Stakeholder Expo
 
@@ -162,13 +136,13 @@ For Next.js Conf, we created a Service channel for each stakeholder.
 
 ### Career Fair
 
-Networking is vital for in-person conferences and replicating that environment virtually poses a challege. For the Career Fair, this starter provides the ability to list post postings, as well as an external link to talk with the company's recruiters on Service.
+Networking is vital for in-person frontends and replicating that environment virtually poses a challege. For the Career Fair, this starter provides the ability to list post postings, as well as an external link to talk with the company's recruiters on Service.
 
 ### Adding Service Chat
 
-For Next.js Conf, we used Service for conference attendees to chat. On each zone, we showed a highlighted message from the corresponding Service channel. If a user in our allow list used the camera emoji (📸) it would show the message on the zone.
+For Next.js Conf, we used Service for frontend attendees to chat. On each zone, we showed a highlighted message from the corresponding Service channel. If a user in our allow list used the camera emoji (📸) it would show the message on the zone.
 
-If you'd like to add similar functionality to your conference, you can use the [API route](https://nextjs.org/docs/api-routes/introduction) below to fetch messages after creating a Service bot. This API route is set up with the proper caching headers and ensures you won't get rate-limited with high traffic.
+If you'd like to add similar functionality to your frontend, you can use the [API route](https://nextjs.org/docs/api-routes/introduction) below to fetch messages after creating a Service bot. This API route is set up with the proper caching headers and ensures you won't get rate-limited with high traffic.
 
 ```ts
 import ms from "ms"
@@ -319,4 +293,4 @@ export default async function getServiceMessage(req: NextApiRequest, res: NextAp
 
 ### Demo
 
-The demo is available at https://watheia.pwa. The data recorded or used on the demo may be removed by Vercel at any point.
+The demo is available at https://watheia.app. The data recorded or used on the demo may be removed by Vercel at any point.

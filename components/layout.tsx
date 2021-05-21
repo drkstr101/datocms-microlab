@@ -39,36 +39,6 @@ export default function Layout({ children, className, hideNav, layoutStyles }: P
   return (
     <>
       <ViewSource />
-      <div className={styles.background}>
-        {!hideNav && (
-          <header className={cn(styles.header)}>
-            <div className={styles["header-logos"]}>
-              <MobileMenu key={router.asPath} />
-              <Link href="/">
-                {/* eslint-disable-next-line */}
-                <a className={styles.logo}>
-                  <image href="/micro.svg" width="64" height="64" />
-                </a>
-              </Link>
-            </div>
-            <div className={styles.tabs}>
-              {NAVIGATION.map(({ name, route }) => (
-                <Link key={name} href={route}>
-                  <a
-                    className={cn(styles.tab, {
-                      [styles["tab-active"]]: activeRoute.startsWith(route),
-                    })}
-                  >
-                    {name}
-                  </a>
-                </Link>
-              ))}
-            </div>
-            <div className={cn(styles["header-right"])}>
-              <image href="/micro.svg" width="64" height="64" />
-            </div>
-          </header>
-        )}
         <div className={styles.page}>
           <main className={styles.main} style={layoutStyles}>
             <SkipNavContent />
@@ -76,7 +46,6 @@ export default function Layout({ children, className, hideNav, layoutStyles }: P
           </main>
           {!activeRoute.startsWith("/zone") && <Footer />}
         </div>
-      </div>
     </>
   )
 }

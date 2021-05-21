@@ -1,10 +1,10 @@
 {
   "name": "Micro Frontend Starter Kit",
   "description": "Fully customizable starter kit for your micro frontend.",
-  "previewImage": "https://watheia.pwa/twitter-card.png",
+  "previewImage": "https://watheia.app/twitter-card.png",
   "datocmsProjectId": "37685",
   "deploymentType": "vercel",
   "buildCommand": "yarn build",
   "datocmsApiTokenEnvName": "DATOCMS_READ_ONLY_API_TOKEN",
-  "livePreviewUrl": "https://watheia.pwa/"
+  "livePreviewUrl": "https://watheia.app/"
 }
