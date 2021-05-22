@@ -15,6 +15,7 @@
  */
 
 module.exports = {
+  basePath: '/home',
   images: {
     domains: [
       "www.datocms-assets.com",
